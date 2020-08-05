@@ -1,0 +1,1 @@
+This is the review module for the Etsy mockup.
