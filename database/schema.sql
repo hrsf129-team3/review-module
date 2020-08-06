@@ -43,3 +43,12 @@ create table reviews (
   foreign key (customer_id) references customers(customer_id),
   foreign key (product_id) references products(product_id)
 );
+
+create view review_info as
+select shops.shop_id, reviews.review_id, products.product_name, products.product_thumbnail, customers.customer_name, customers.customer_avatar,
+reviews.review_text, reviews.review_score, reviews.review_image, reviews.review_date
+from reviews, shops, products, product_list, customers
+where reviews.customer_id = customers.customer_id
+and shops.shop_id = product_list.shop_id
+and products.product_id = product_list.product_id
+and reviews.product_id = product_list.product_id;
