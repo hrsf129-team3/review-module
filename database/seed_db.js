@@ -63,7 +63,7 @@ db.query(`select product_id from products;`, function(err, result) {
     for(let i = 0; i < result.length; i++) {
       productId.push(result[i].product_id);
     }
-    console.log(productId);
+    //console.log(productId);
     db.query(`select shop_id from shops;`, function(err, result) {
       if(err) {
         console.log(err);
@@ -73,7 +73,7 @@ db.query(`select product_id from products;`, function(err, result) {
         for(let i = 0; i < result.length; i++) {
           shopId.push(result[i].shop_id);
         }
-        console.log(shopId);
+        //console.log(shopId);
 
         //add products to product_list table: randomize shop if more than one exists.
         for(let i = 0; i < productId.length; i++) {
@@ -85,11 +85,56 @@ db.query(`select product_id from products;`, function(err, result) {
     });
   }
 });
+console.log("Product list seeded.");
 
 //finally, populate the reviews table.  Get the customer and product IDs,
 //then create a set of reviews with random customers/products assigned to them.
+db.query(`select product_id from products;`, function(err, result) {
+  if(err) {
+    console.log(err);
+  } else{
+    //create an array of product IDs
+    let productId = [];
+    for(let i = 0; i < result.length; i++) {
+      productId.push(result[i].product_id);
+    }
 
+    db.query(`select customer_id from customers;`, function(err, result) {
+      if(err) {
+        console.log(err);
+      } else {
+        let customerId = [];
+        for(let i = 0; i < result.length; i++){
+          customerId.push(result[i].customer_id);
+        }
 
+        //create a number of fake reviews, and populate them to the table.
+        //TBD: add random review image
+        for(let i = 0; i < 100; i++) {
+          let chosenCustomer = Math.floor(Math.random() * customerId.length);
+          let chosenProduct = Math.floor(Math.random() * productId.length);
+          let reviewScore = Math.floor(Math.random() * 5) + 1;
+          let reviewDate = new Date(faker.fake("{{date.past}}"));
+          //console.log(reviewDate);
+          reviewDate = reviewDate.toISOString().split('T')[0];
+          let reviewText = '';
+
+          //randomly choose the review length
+          if(Math.random() > 0.5) {
+            reviewText = faker.fake("{{lorem.paragraph}}");
+          } else {
+            reviewText = faker.fake("{{lorem.sentence}}");
+          }
+          db.query(`insert into reviews (customer_id, product_id, review_text, review_score, review_date) values (${customerId[chosenCustomer]}, ${productId[chosenProduct]}, "${reviewText}",${reviewScore},"${reviewDate}");`);
+        }
+
+        //close db connection when finished
+        db.end();
+      }
+    });
+  }
+});
+console.log("Reviews seeded.");
 
 
 //close db connection when finished
@@ -104,11 +149,3 @@ db.query(`select product_id from products;`, function(err, result) {
 // console.log(faker.fake("{{lorem.sentence}}"));
 // console.log(faker.fake("{{image.avatar}}"));
 // console.log(faker.fake("{{image.cats}}"));
-
-// db.query(`select product_id from products;`, function(err, result) {
-//   console.log(result);
-// });
-
-// db.query(`select shop_id from shops;`, function(err, result) {
-//   console.log(result);
-// });
