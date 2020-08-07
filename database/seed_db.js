@@ -19,7 +19,7 @@ for (let i = 0; i < tables.length; i++) {
 
 //create a list of fake customers.  Customers will have a random chance
 //to have an avatar (to reflect some users not uploading one.)
-for(let i = 0; i < 25; i ++) {
+for(let i = 0; i < 25; i++) {
   let customerName = faker.fake("{{internet.userName}}");
   let cutomerAvatar = null;
   if(Math.random() > 0.4) {
@@ -32,8 +32,68 @@ for(let i = 0; i < 25; i ++) {
 }
 console.log("Customers seeded.");
 
+//create a small list of fake shops.  For the purposes of demonstration, only 1-2 shops
+//are needed.
+for(let i = 0; i < 1; i++) {
+  let shopName = faker.fake("{{company.companyName}}");
+  db.query(`insert into shops (shop_name) values ("${shopName}");`);
+}
+console.log("Shops seeded.");
+
+//create a small list of products.
+for(let i = 0; i < 15; i++) {
+  let productName = faker.fake("{{commerce.productName}}");
+  //product image will be small in any given review
+  //placeholder for an actual image thumbnail.
+  let productThumbnail = faker.fake("{{image.avatar}}");
+
+  db.query(`insert into products (product_name, product_thumbnail) values ("${productName}", "${productThumbnail}");`);
+}
+console.log("Products seeded.");
+
+//once the base tables have been seeded, populate the tables with dependencies
+
+//populate the product_list table
+db.query(`select product_id from products;`, function(err, result) {
+  if(err) {
+    console.log(err);
+  } else{
+    //create an array of product IDs
+    let productId = [];
+    for(let i = 0; i < result.length; i++) {
+      productId.push(result[i].product_id);
+    }
+    console.log(productId);
+    db.query(`select shop_id from shops;`, function(err, result) {
+      if(err) {
+        console.log(err);
+      } else {
+        //create an array of shop IDs
+        let shopId = [];
+        for(let i = 0; i < result.length; i++) {
+          shopId.push(result[i].shop_id);
+        }
+        console.log(shopId);
+
+        //add products to product_list table: randomize shop if more than one exists.
+        for(let i = 0; i < productId.length; i++) {
+          let chosenShop = Math.floor(Math.random() * shopId.length);
+
+          db.query(`insert into product_list (shop_id, product_id) values (${shopId[chosenShop]}, ${productId[i]});`);
+        }
+      }
+    });
+  }
+});
+
+//finally, populate the reviews table.  Get the customer and product IDs,
+//then create a set of reviews with random customers/products assigned to them.
+
+
+
+
 //close db connection when finished
-db.end();
+//db.end();
 
 //testing faker calls
 // console.log(faker.fake("{{internet.userName}}"));
@@ -44,3 +104,11 @@ db.end();
 // console.log(faker.fake("{{lorem.sentence}}"));
 // console.log(faker.fake("{{image.avatar}}"));
 // console.log(faker.fake("{{image.cats}}"));
+
+// db.query(`select product_id from products;`, function(err, result) {
+//   console.log(result);
+// });
+
+// db.query(`select shop_id from shops;`, function(err, result) {
+//   console.log(result);
+// });
