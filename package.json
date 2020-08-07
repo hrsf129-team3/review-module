@@ -1,17 +1,38 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "front-end-capstone",
+  "description": "> Project description",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "build": "webpack --mode production"
   },
   "dependencies": {
+    "faker": "^4.1.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "mysql": "^2.18.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrsf129-team3/review-module.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hrsf129-team3/review-module/issues"
+  },
+  "homepage": "https://github.com/hrsf129-team3/review-module#readme"
 }
