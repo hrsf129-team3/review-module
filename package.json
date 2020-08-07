@@ -9,7 +9,9 @@
   "scripts": {
     "build": "webpack --mode production"
   },
-  "dependencies": {},
+  "dependencies": {
+    "faker": "^4.1.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
