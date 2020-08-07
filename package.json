@@ -1,15 +1,25 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "front-end-capstone",
+  "description": "> Project description",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrsf129-team3/review-module.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hrsf129-team3/review-module/issues"
+  },
+  "homepage": "https://github.com/hrsf129-team3/review-module#readme"
 }
