@@ -5,7 +5,7 @@
 var faker = require('faker');
 var mysql = require('mysql');
 
-//database connection: change if
+//database connection
 var mysqlConfig = require('./config.js');
 var db = mysql.createConnection(mysqlConfig);
 
