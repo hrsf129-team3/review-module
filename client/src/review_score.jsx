@@ -1,5 +1,18 @@
+//this module handles rendering the five star review scale for both individual and overall (average) review scores.
+//when calculating the overall review score, this should round to the nearest half star value (e.g. 4.3 to 4.5, 4.89 to 5).
+import React from 'react';
 
+class ReviewScore extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
+    return (<h5>Review score goes here...</h5>);
+  }
+}
+
+export default ReviewScore;
 
 //SVG scripts for star icons on Etsy website
 //full star icon
