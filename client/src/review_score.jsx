@@ -2,13 +2,17 @@
 //when calculating the overall review score, this should round to the nearest half star value (e.g. 4.3 to 4.5, 4.89 to 5).
 import React from 'react';
 
+//score should come in on this.props.score
 class ReviewScore extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  /*TBD:
+  convert score to star rating
+  */
   render() {
-    return (<h5>Review score goes here...</h5>);
+    return (<span>Score: {this.props.score}</span>);
   }
 }
 

@@ -79,7 +79,7 @@ class ReviewContainer extends React.Component {
   render() {
     let reviews = this.getReviews();
     return (<div>
-              <span>{this.state.reviewCount} shop reviews {this.state.averageScore}</span>
+              <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
             </div>);
   }
