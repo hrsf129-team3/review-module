@@ -13,9 +13,10 @@ class Review extends React.Component {
   -handling for attached images on a review
   */
   render () {
+    let avatar = (this.props.info.customer_avatar === null) ? 'https://etsydoppleganger.s3-us-west-1.amazonaws.com/noavatar.jpg' : this.props.info.customer_avatar;
     console.log(this.props.info);
     return (<div>
-              <div><img src={this.props.info.customer_avatar} /> {this.props.info.customer_name} {this.props.info.review_date}</div>
+              <div><img src={avatar} /> {this.props.info.customer_name} {this.props.info.review_date}</div>
               <div><ReviewScore score={this.props.info.review_score}/></div>
               <p>{this.props.info.review_text}</p>
               <p>Purchased item:</p>
