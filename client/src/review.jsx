@@ -8,6 +8,7 @@ class Review extends React.Component {
   }
 
   render () {
+    console.log(this.props);
     return (<div>
               <ReviewScore />
               <h3>This is a review.</h3>

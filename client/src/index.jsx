@@ -14,10 +14,12 @@ class ReviewContainer extends React.Component {
     this.state = {
       reviewCount: 0,
       currentPage: 0,
-      reviews: []
+      reviews: [],
+      averageScore: 0
     };
 
     this.getReviews = this.getReviews.bind(this);
+    this.getAverageScore = this.getAverageScore.bind(this);
   }
 
   //get reviews from datbase and save to container state
@@ -30,7 +32,8 @@ class ReviewContainer extends React.Component {
           reviews: response
         });
         this.setState({
-          reviewCount: this.state.reviews.length
+          reviewCount: this.state.reviews.length,
+          averageScore: this.getAverageScore()
         });
         console.log(this.state.reviewCount);
       }),
@@ -40,29 +43,46 @@ class ReviewContainer extends React.Component {
     });
   }
 
+  //componentDidMount helper function: calculates the average score of all reviews
+  //stored in state
+  getAverageScore() {
+    let total = 0;
+    for(let i = 0; i < this.state.reviews.length; i++) {
+      total += this.state.reviews[i].review_score;
+    }
+    return (total / this.state.reviews.length);
+  }
+
   //Render helper function, generates the HTML for each Review component
   //and returns the completed script.
   getReviews() {
     console.log("Updating reviews for page...");
     let position = this.state.currentPage * maxReviewsPerPage;
+    let endPosition = (position + maxReviewsPerPage > this.state.reviews.length) ? this.state.reviews.length : position + maxReviewsPerPage;
     let result = [];
-    for(let i = position; i < position + maxReviewsPerPage; i++) {
-      result.push(<Review />);
+    for(let i = position; i < endPosition; i++) {
+      result.push(<Review info={this.state.reviews[i]}/>);
     }
 
     return result;
   }
 
 
+  /*TBD:
+  -Replace average score number with ReviewScore component
+  -Add Sort By dropdown menu
+  -Page selector at bottom of container
+  -Placeholder image for image carousel
+  -CSS styling
+  -Fade in/out animation when switching between pages
+  */
   render() {
     let reviews = this.getReviews();
     return (<div>
+              <span>{this.state.reviewCount} shop reviews {this.state.averageScore}</span>
               {reviews}
             </div>);
   }
 }
 
 ReactDOM.render(<ReviewContainer />, document.getElementById('review-app'));
-
-//full star icon
-//<svg xmlns="http://www.w3.org/2000/svg" viewBox="3 3 18 18" aria-hidden="true" focusable="false"><path d="M20.83,9.15l-6-.52L12.46,3.08h-.92L9.18,8.63l-6,.52L2.89,10l4.55,4L6.08,19.85l.75.55L12,17.3l5.17,3.1.75-.55L16.56,14l4.55-4Z"></path></svg>
