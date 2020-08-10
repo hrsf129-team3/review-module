@@ -16,9 +16,11 @@ class ReviewContainer extends React.Component {
       currentPage: 0,
       reviews: []
     };
+
+    this.getReviews = this.getReviews.bind(this);
   }
 
-  //get reviews from datbase and save to state
+  //get reviews from datbase and save to container state
   componentDidMount() {
     $.ajax({
       method: 'GET',
@@ -38,9 +40,24 @@ class ReviewContainer extends React.Component {
     });
   }
 
+  //Render helper function, generates the HTML for each Review component
+  //and returns the completed script.
+  getReviews() {
+    console.log("Updating reviews for page...");
+    let position = this.state.currentPage * maxReviewsPerPage;
+    let result = [];
+    for(let i = position; i < position + maxReviewsPerPage; i++) {
+      result.push(<Review />);
+    }
+
+    return result;
+  }
+
+
   render() {
+    let reviews = this.getReviews();
     return (<div>
-              <Review />
+              {reviews}
             </div>);
   }
 }
