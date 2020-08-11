@@ -3,6 +3,10 @@ import { shallow, mount, render } from 'enzyme';
 import Review from '../client/src/review.jsx';
 import ReviewScore from '../client/src/review_score.jsx';
 import ReviewContainer from '../client/src/review_container.jsx';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 // component testing
 describe('<ReviewContainer />', () => {
@@ -19,8 +23,8 @@ describe('<ReviewContainer />', () => {
   })
 
   // make sure App contains RecommendedProducts component
-  it('should have <Review /> as a subcomponent', () => {
-    expect(wrapper.containsMatchingElement(<Review />)).toEqual(true);
+  it('should have <ReviewScore /> as a subcomponent', () => {
+    expect(wrapper.containsMatchingElement(<ReviewScore />)).toEqual(true);
   })
 
 });
