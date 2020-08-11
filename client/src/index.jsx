@@ -69,7 +69,6 @@ class ReviewContainer extends React.Component {
 
 
   /*TBD:
-  -Replace average score number with ReviewScore component
   -Add Sort By dropdown menu
   -Page selector at bottom of container
   -Placeholder image for image carousel

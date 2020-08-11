@@ -8,7 +8,6 @@ class Review extends React.Component {
   }
 
   /*TBD:
-  -load default avatar when no user avatar is provided
   -change date to Etsy style (e.g. "Nov 5, 2019")
   -handling for attached images on a review
   */
