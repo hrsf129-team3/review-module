@@ -26,6 +26,7 @@ class ReviewContainer extends React.Component {
     this.nextPage = this.nextPage.bind(this);
     this.firstPage= this.firstPage.bind(this);
     this.lastPage = this.lastPage.bind(this);
+    this.toPage = this.toPage.bind(this);
   }
 
   //get reviews from datbase and save to container state
@@ -103,7 +104,7 @@ class ReviewContainer extends React.Component {
 
   //onClick handler: switch to first page
   firstPage(){
-    if(this.state.currentPage != 0) {
+    if(this.state.currentPage !== 0) {
       this.setState({
         currentPage: 0
       });
@@ -112,16 +113,25 @@ class ReviewContainer extends React.Component {
 
   //onClick handler: switch to last page
   lastPage(){
-    if(this.state.currentPage != this.state.maxPage -1) {
+    if(this.state.currentPage !== this.state.maxPage -1) {
       this.setState({
         currentPage: this.state.maxPage - 1
       });
     }
   }
 
+  //onClick handler: switch to page listed in target event
+  toPage(event){
+    let page = parseInt(event.target.innerHTML, 10);
+    if(this.state.currentPage + 1 !== page) {
+      this.setState({
+        currentPage: page - 1
+      });
+    }
+  }
+
   /*TBD:
   -Add Sort By dropdown menu
-  -Page selector at bottom of container
   -Placeholder image for image carousel
   -CSS styling
   -Fade in/out animation when switching between pages
@@ -132,7 +142,7 @@ class ReviewContainer extends React.Component {
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
-              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage}/>
+              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
             </div>);
   }
 }
@@ -170,7 +180,7 @@ class ReviewPagination extends React.Component {
     results.push(<span onClick={this.props.first}>1</span>);
     //if current page is 1 or 2, add a 2 to the page list
     if(this.props.currentPage <= 2) {
-      results.push(<span>2</span>);
+      results.push(<span onClick={this.props.to}>2</span>);
     }
     //if current page is greater than two (and max page count is also greater than 2), add an ellipsis
     if(this.props.currentPage > 2 && this.props.maxPage > 2) {
@@ -186,7 +196,7 @@ class ReviewPagination extends React.Component {
     }
     //if current page is second to last or last, add it to page list
     if(this.props.currentPage >= this.props.maxPage - 1) {
-      results.push(<span>{this.props.maxPage - 1}</span>);
+      results.push(<span onClick={this.props.to}>{this.props.maxPage - 1}</span>);
     }
     //finally, draw the last page number if there is more than one page
     if(this.props.maxPage !== 1) {
