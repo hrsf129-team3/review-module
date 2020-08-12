@@ -19,7 +19,6 @@ class ReviewScore extends React.Component {
   }
 
   //helper function to convert score to star rating.
-  //TBD: render as stars
   calculateScore() {
     let roundedScore = Math.round(this.props.score * 2) / 2;
     let result = [];

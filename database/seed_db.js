@@ -18,6 +18,13 @@ const productImages = [
 'https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail5.jpg'
 ];
 
+//random collection of review images
+const reviewImages = [
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/large_review_image.jpg',
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/large_review_image_2.jpg',
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/large_review_image_3.jpg'
+];
+
 //truncate tables
 const tables = ['reviews', 'product_list', 'products', 'shops', 'customers'];
 
@@ -127,6 +134,7 @@ db.query(`select product_id from products;`, function(err, result) {
           //console.log(reviewDate);
           reviewDate = reviewDate.toISOString().split('T')[0];
           let reviewText = '';
+          let reviewImage = null;
 
           //randomly choose the review length
           if(Math.random() > 0.5) {
@@ -134,7 +142,13 @@ db.query(`select product_id from products;`, function(err, result) {
           } else {
             reviewText = faker.fake("{{lorem.sentence}}");
           }
-          db.query(`insert into reviews (customer_id, product_id, review_text, review_score, review_date) values (${customerId[chosenCustomer]}, ${productId[chosenProduct]}, "${reviewText}",${reviewScore},"${reviewDate}");`);
+
+          //randomly attach review images to certain reviews
+          if(Math.random() + 0.01 < (reviewImages.length /(100-i))) {
+            reviewImage = reviewImages.pop();
+          }
+
+          db.query(`insert into reviews (customer_id, product_id, review_text, review_score, review_date, review_image) values (${customerId[chosenCustomer]}, ${productId[chosenProduct]}, "${reviewText}",${reviewScore},"${reviewDate}", "${reviewImage}");`);
         }
 
         //close db connection when finished

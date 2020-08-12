@@ -7,6 +7,8 @@ import ReviewScore from './review_score.jsx';
 //set max number of reviews displayed at any one time
 const maxReviewsPerPage = 4;
 
+const dummyCarousel='https://etsydoppleganger.s3-us-west-1.amazonaws.com/dummycarousel.jpeg';
+
 //container for the review module.
 class ReviewContainer extends React.Component {
   constructor(props) {
@@ -131,8 +133,8 @@ class ReviewContainer extends React.Component {
   }
 
   /*TBD:
-  -Add Sort By dropdown menu
-  -Placeholder image for image carousel
+  -Add Sort By dropdown menu for Recommended and Newest
+  -Dummy carousel should scale to the width of the component
   -CSS styling
   -Fade in/out animation when switching between pages
   */
@@ -143,6 +145,8 @@ class ReviewContainer extends React.Component {
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
               <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
+              <div>Photos from reviews</div>
+              <img src={dummyCarousel}/>
             </div>);
   }
 }
@@ -199,7 +203,7 @@ class ReviewPagination extends React.Component {
       results.push(<span onClick={this.props.to}>{this.props.maxPage - 1}</span>);
     }
     //finally, draw the last page number if there is more than one page
-    if(this.props.maxPage !== 1) {
+    if(this.props.maxPage > 2) {
       results.push(<span onClick={this.props.last}>{this.props.maxPage}</span>)
     }
 
