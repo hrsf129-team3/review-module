@@ -8,6 +8,33 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
+//test reviews for Review module test
+let reviewNoImage = {
+  customer_avatar: null,
+  customer_name: "Brad78",
+  product_name: "Tasty Frozen Hat",
+  product_thumbnail: "https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail2.jpg",
+  review_date: "2020-07-19T07:00:00.000Z",
+  review_id: 97,
+  review_image: "null",
+  review_score: 1,
+  review_text: "Ad deleniti iusto. Amet beatae blanditiis officiis tempora. Esse quis quasi culpa ea officia beatae quia iusto nobis. Cumque deleniti ipsam architecto est autem velit et totam.",
+  shop_id: 2
+};
+
+let reviewWithImage = {
+  customer_avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/chadami/128.jpg",
+  customer_name: "Davion_Waters",
+  product_name: "Rustic Plastic Ball",
+  product_thumbnail: "https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail4.jpg",
+  review_date: "2020-03-12T07:00:00.000Z",
+  review_id: 151,
+  review_image: "https://etsydoppleganger.s3-us-west-1.amazonaws.com/large_review_image.jpg",
+  review_score: 4,
+  review_text: "Deleniti qui veniam consequuntur. Excepturi qui ad vero sit. Reiciendis odit quidem. Atque cupiditate rerum ea aut enim ipsam omnis ea.",
+  shop_id: 2
+};
+
 // component testing
 describe('<ReviewContainer />', () => {
 
@@ -28,19 +55,31 @@ describe('<ReviewContainer />', () => {
 });
 
 //TBD: create test record(s) for Review
-// describe('<Review />', () =>{
-//   let wrapper;
-//   beforeEach(() => {
-//     wrapper = mount(<Review />)
-//   });
+describe('<Review />', () =>{
+  let wrapperNoImage;
+  let wrapperWithImage;
+  beforeEach(() => {
+    wrapperNoImage = mount(<Review info={reviewNoImage}/>);
+    wrapperWithImage = mount(<Review info={reviewWithImage}/>);
+  });
 
-//   it('should exist', () => {
-//     expect(wrapper).toBeDefined();
-//   })
+  it('should exist', () => {
+    expect(wrapperNoImage).toBeDefined();
+    expect(wrapperWithImage).toBeDefined();
+  })
 
-// });
+  it('should have <ReviewScore /> as a subcomponent', () => {
+      expect(wrapperNoImage.containsMatchingElement(<ReviewScore />)).toEqual(true);
+      expect(wrapperWithImage.containsMatchingElement(<ReviewScore />)).toEqual(true);
+  })
 
-//TBD: test varying ReviewScore values
+  it('should render the review image if one is provided', () => {
+    expect(wrapperNoImage.find('img').length).toEqual(2);
+    expect(wrapperWithImage.find('img').length).toEqual(3);
+  })
+
+});
+
 describe('<ReviewScore />', () => {
 
   it('should exist', () => {
@@ -58,7 +97,7 @@ describe('<ReviewScore />', () => {
     expect(wrapper.find('.half-star').length).toEqual(1);
   });
 
-  it('should correctly round to the nearest half star', () => {
+  it('should correctly round to the nearest half for average scores', () => {
     let wrapper = render(<ReviewScore score="3.59"/>);
     expect(wrapper.find('.half-star').length).toEqual(1);
     wrapper = render(<ReviewScore score="3.98"/>);
