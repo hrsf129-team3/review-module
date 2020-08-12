@@ -11,20 +11,18 @@ configure({ adapter: new Adapter() });
 // component testing
 describe('<ReviewContainer />', () => {
 
-  // testing App component
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<ReviewContainer />)
+    wrapper = mount(<ReviewContainer />)
   });
 
-  // make sure App renders
   it('should exist', () => {
     expect(wrapper).toBeDefined();
   })
 
-  // make sure App contains RecommendedProducts component
   it('should have <ReviewScore /> as a subcomponent', () => {
     expect(wrapper.containsMatchingElement(<ReviewScore />)).toEqual(true);
   })
+
 
 });
