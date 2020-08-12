@@ -93,8 +93,29 @@ class ReviewContainer extends React.Component {
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
-              <div>Page {oneCurrentPage} of {this.state.maxPage}</div>
+              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} />
             </div>);
+  }
+}
+
+//page counter class for Review container module
+//Etsy pagination looks like the following:
+// (<-) (pages) (->)
+//arrows select previous or next page, respectively
+//first and last page is always listed between the arrows.  Clicking these takes the user to the first or last page of reviews.
+//if on the first/second page, pages are rendered like so:
+// (<-) (1) (2) ... (last) (->)
+//last/second to last are handled similarly.  For all other page numbers:
+//(<-) (1) ... (n) ... (last) (->)
+//class should receive current and max pages from parent, along with functions to change between pages
+class ReviewPagination extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+
+  render() {
+    return (<div>Page {this.props.currentPage} of {this.props.maxPage}</div>);
   }
 }
 

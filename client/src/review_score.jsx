@@ -39,7 +39,7 @@ class ReviewScore extends React.Component {
   }
 
   /*TBD:
-  convert score to star rating
+  update star CSS styling to match Etsy site (horizontal space between each star, etc.)
   */
   render() {
     let score = this.calculateScore();
