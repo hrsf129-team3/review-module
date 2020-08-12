@@ -5,9 +5,18 @@
 var faker = require('faker');
 var mysql = require('mysql');
 
-//database connection: change if
+//database connection
 var mysqlConfig = require('./config.js');
 var db = mysql.createConnection(mysqlConfig);
+
+//random collection of product thumbnails
+const productImages = [
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail.jpg',
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail2.jpg',
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail3.jpg',
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail4.jpg',
+'https://etsydoppleganger.s3-us-west-1.amazonaws.com/product_thumbnail5.jpg'
+];
 
 //truncate tables
 const tables = ['reviews', 'product_list', 'products', 'shops', 'customers'];
@@ -45,7 +54,7 @@ for(let i = 0; i < 15; i++) {
   let productName = faker.fake("{{commerce.productName}}");
   //product image will be small in any given review
   //placeholder for an actual image thumbnail.
-  let productThumbnail = faker.fake("{{image.avatar}}");
+  let productThumbnail = productImages[Math.floor(Math.random() * productImages.length)];
 
   db.query(`insert into products (product_name, product_thumbnail) values ("${productName}", "${productThumbnail}");`);
 }
