@@ -22,6 +22,8 @@ class ReviewContainer extends React.Component {
     this.getReviews = this.getReviews.bind(this);
     this.getAverageScore = this.getAverageScore.bind(this);
     this.getMaxPages = this.getMaxPages.bind(this);
+    this.previousPage = this.previousPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
   }
 
   //get reviews from datbase and save to container state
@@ -79,6 +81,24 @@ class ReviewContainer extends React.Component {
     }
   }
 
+  //onclick handler: should decrement currentPage
+  previousPage() {
+    if(this.state.currentPage > 0) {
+      this.setState({
+        currentPage: this.state.currentPage - 1
+      });
+    };
+  }
+
+  //onclick handler: should increment currentPage
+  nextPage(){
+    if(this.state.currentPage + 1 < this.state.maxPage) {
+      this.setState({
+        currentPage: this.state.currentPage + 1
+      });
+    }
+  }
+
 
   /*TBD:
   -Add Sort By dropdown menu
@@ -93,7 +113,7 @@ class ReviewContainer extends React.Component {
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
-              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} />
+              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage}/>
             </div>);
   }
 }
@@ -145,12 +165,12 @@ class ReviewPagination extends React.Component {
     if(this.props.currentPage < this.props.maxPage - 1) {
       results.push(<span>...</span>);
     }
-    //if current page is second to last, add it to page list
-    if(this.props.currentPage === this.props.maxPage - 1) {
-      results.push(<span>{this.props.currentPage}</span>);
+    //if current page is second to last or last, add it to page list
+    if(this.props.currentPage >= this.props.maxPage - 1) {
+      results.push(<span>{this.props.maxPage - 1}</span>);
     }
-    //finally, draw the last page number
-    if(this.props.currentPage !== this.props.maxPage) {
+    //finally, draw the last page number if there is more than one page
+    if(this.props.maxPage !== 1) {
       results.push(<span>{this.props.maxPage}</span>)
     }
 
@@ -160,7 +180,7 @@ class ReviewPagination extends React.Component {
 
   render() {
     let pages = this.getPages();
-    return (<div><span>{leftArrow}</span>{pages}<span>{rightArrow}</span></div>);
+    return (<div><span onClick={this.props.previous}>{leftArrow}</span>{pages}<span onClick={this.props.next}>{rightArrow}</span></div>);
   }
 }
 
