@@ -24,6 +24,8 @@ class ReviewContainer extends React.Component {
     this.getMaxPages = this.getMaxPages.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
+    this.firstPage= this.firstPage.bind(this);
+    this.lastPage = this.lastPage.bind(this);
   }
 
   //get reviews from datbase and save to container state
@@ -99,6 +101,23 @@ class ReviewContainer extends React.Component {
     }
   }
 
+  //onClick handler: switch to first page
+  firstPage(){
+    if(this.state.currentPage != 0) {
+      this.setState({
+        currentPage: 0
+      });
+    }
+  }
+
+  //onClick handler: switch to last page
+  lastPage(){
+    if(this.state.currentPage != this.state.maxPage -1) {
+      this.setState({
+        currentPage: this.state.maxPage - 1
+      });
+    }
+  }
 
   /*TBD:
   -Add Sort By dropdown menu
@@ -113,7 +132,7 @@ class ReviewContainer extends React.Component {
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
-              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage}/>
+              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage}/>
             </div>);
   }
 }
@@ -148,7 +167,7 @@ class ReviewPagination extends React.Component {
   getPages() {
     let results = [];
     //render first page, then conditionally render from here
-    results.push(<span>1</span>);
+    results.push(<span onClick={this.props.first}>1</span>);
     //if current page is 1 or 2, add a 2 to the page list
     if(this.props.currentPage <= 2) {
       results.push(<span>2</span>);
@@ -171,7 +190,7 @@ class ReviewPagination extends React.Component {
     }
     //finally, draw the last page number if there is more than one page
     if(this.props.maxPage !== 1) {
-      results.push(<span>{this.props.maxPage}</span>)
+      results.push(<span onClick={this.props.last}>{this.props.maxPage}</span>)
     }
 
     return results;
