@@ -11,7 +11,8 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "npm run test -- --coverage"
   },
   "dependencies": {
     "faker": "^4.1.0"
