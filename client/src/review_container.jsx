@@ -124,9 +124,43 @@ class ReviewPagination extends React.Component {
     super(props);
   }
 
+  //render helper to create page numbers
+  getPages() {
+    let results = [];
+    //render first page, then conditionally render from here
+    results.push(<span>1</span>);
+    //if current page is 1 or 2, add a 2 to the page list
+    if(this.props.currentPage <= 2) {
+      results.push(<span>2</span>);
+    }
+    //if current page is greater than two (and max page count is also greater than 2), add an ellipsis
+    if(this.props.currentPage > 2 && this.props.maxPage > 2) {
+      results.push(<span>...</span>);
+    }
+    //if current page is not the last/second to last page, add the current page number to the page list.
+    //also, add another ellipsis while we're here
+    if(this.props.currentPage < this.props.maxPage -1 && this.props.currentPage > 2) {
+      results.push(<span>{this.props.currentPage}</span>);
+    }
+    if(this.props.currentPage < this.props.maxPage - 1) {
+      results.push(<span>...</span>);
+    }
+    //if current page is second to last, add it to page list
+    if(this.props.currentPage === this.props.maxPage - 1) {
+      results.push(<span>{this.props.currentPage}</span>);
+    }
+    //finally, draw the last page number
+    if(this.props.currentPage !== this.props.maxPage) {
+      results.push(<span>{this.props.maxPage}</span>)
+    }
+
+    return results;
+  }
+
 
   render() {
-    return (<div>{leftArrow}Page {this.props.currentPage} of {this.props.maxPage}{rightArrow}</div>);
+    let pages = this.getPages();
+    return (<div><span>{leftArrow}</span>{pages}<span>{rightArrow}</span></div>);
   }
 }
 
