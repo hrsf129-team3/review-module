@@ -14,12 +14,14 @@ class ReviewContainer extends React.Component {
     this.state = {
       reviewCount: 0,
       currentPage: 0,
+      maxPage: 0,
       reviews: [],
       averageScore: 0
     };
 
     this.getReviews = this.getReviews.bind(this);
     this.getAverageScore = this.getAverageScore.bind(this);
+    this.getMaxPages = this.getMaxPages.bind(this);
   }
 
   //get reviews from datbase and save to container state
@@ -33,7 +35,8 @@ class ReviewContainer extends React.Component {
         });
         this.setState({
           reviewCount: this.state.reviews.length,
-          averageScore: this.getAverageScore()
+          averageScore: this.getAverageScore(),
+          maxPage: this.getMaxPages(this.state.reviews.length)
         });
         console.log(this.state.reviewCount);
       }),
@@ -67,6 +70,15 @@ class ReviewContainer extends React.Component {
     return result;
   }
 
+  //helper function to calculate max number of pages
+  getMaxPages(reviews) {
+    if(reviews % maxReviewsPerPage === 0) {
+      return reviews / maxReviewsPerPage;
+    } else {
+      return Math.floor(reviews / maxReviewsPerPage) + 1;
+    }
+  }
+
 
   /*TBD:
   -Add Sort By dropdown menu
@@ -76,10 +88,12 @@ class ReviewContainer extends React.Component {
   -Fade in/out animation when switching between pages
   */
   render() {
+    let oneCurrentPage = this.state.currentPage + 1;
     let reviews = this.getReviews();
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
+              <div>Page {oneCurrentPage} of {this.state.maxPage}</div>
             </div>);
   }
 }
