@@ -43,14 +43,74 @@ describe('<ReviewContainer />', () => {
 //TBD: test varying ReviewScore values
 describe('<ReviewScore />', () => {
 
-  let wrapper;
-  beforeEach(() => {
-    wrapper = mount(<ReviewScore />)
-  });
-
   it('should exist', () => {
+    let wrapper = mount(<ReviewScore score="5"/>);
     expect(wrapper).toBeDefined();
   })
+
+  it('should render five stars', () => {
+    let wrapper = render(<ReviewScore score="5"/>);
+    expect(wrapper.find('.full-star').length).toEqual(5);
+  })
+
+  it('should correctly render half stars', () => {
+    let wrapper = render(<ReviewScore score="3.5"/>);
+    expect(wrapper.find('.half-star').length).toEqual(1);
+  });
+
+  it('should correctly round to the nearest half star', () => {
+    let wrapper = render(<ReviewScore score="3.59"/>);
+    expect(wrapper.find('.half-star').length).toEqual(1);
+    wrapper = render(<ReviewScore score="3.98"/>);
+    expect(wrapper.find('.half-star').length).toEqual(0);
+  });
+
+  it('should correclty render each possible score from 1 to 5', () => {
+    let wrapper = render(<ReviewScore score="1"/>);
+    expect(wrapper.find('.full-star').length).toEqual(1);
+    expect(wrapper.find('.half-star').length).toEqual(0);
+    expect(wrapper.find('.empty-star').length).toEqual(4);
+
+    wrapper = render(<ReviewScore score="1.5"/>);
+    expect(wrapper.find('.full-star').length).toEqual(1);
+    expect(wrapper.find('.half-star').length).toEqual(1);
+    expect(wrapper.find('.empty-star').length).toEqual(3);
+
+    wrapper = render(<ReviewScore score="2"/>);
+    expect(wrapper.find('.full-star').length).toEqual(2);
+    expect(wrapper.find('.half-star').length).toEqual(0);
+    expect(wrapper.find('.empty-star').length).toEqual(3);
+
+    wrapper = render(<ReviewScore score="2.5"/>);
+    expect(wrapper.find('.full-star').length).toEqual(2);
+    expect(wrapper.find('.half-star').length).toEqual(1);
+    expect(wrapper.find('.empty-star').length).toEqual(2);
+
+    wrapper = render(<ReviewScore score="3"/>);
+    expect(wrapper.find('.full-star').length).toEqual(3);
+    expect(wrapper.find('.half-star').length).toEqual(0);
+    expect(wrapper.find('.empty-star').length).toEqual(2);
+
+    wrapper = render(<ReviewScore score="3.5"/>);
+    expect(wrapper.find('.full-star').length).toEqual(3);
+    expect(wrapper.find('.half-star').length).toEqual(1);
+    expect(wrapper.find('.empty-star').length).toEqual(1);
+
+    wrapper = render(<ReviewScore score="4"/>);
+    expect(wrapper.find('.full-star').length).toEqual(4);
+    expect(wrapper.find('.half-star').length).toEqual(0);
+    expect(wrapper.find('.empty-star').length).toEqual(1);
+
+    wrapper = render(<ReviewScore score="4.5"/>);
+    expect(wrapper.find('.full-star').length).toEqual(4);
+    expect(wrapper.find('.half-star').length).toEqual(1);
+    expect(wrapper.find('.empty-star').length).toEqual(0);
+
+    wrapper = render(<ReviewScore score="5"/>);
+    expect(wrapper.find('.full-star').length).toEqual(5);
+    expect(wrapper.find('.half-star').length).toEqual(0);
+    expect(wrapper.find('.empty-star').length).toEqual(0);
+  });
 });
 
 
