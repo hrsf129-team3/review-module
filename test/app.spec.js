@@ -26,3 +26,31 @@ describe('<ReviewContainer />', () => {
 
 
 });
+
+//TBD: create test record(s) for Review
+// describe('<Review />', () =>{
+//   let wrapper;
+//   beforeEach(() => {
+//     wrapper = mount(<Review />)
+//   });
+
+//   it('should exist', () => {
+//     expect(wrapper).toBeDefined();
+//   })
+
+// });
+
+//TBD: test varying ReviewScore values
+describe('<ReviewScore />', () => {
+
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(<ReviewScore />)
+  });
+
+  it('should exist', () => {
+    expect(wrapper).toBeDefined();
+  })
+});
+
+

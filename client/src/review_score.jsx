@@ -48,7 +48,7 @@ class ReviewScore extends React.Component {
       position: 'relative',
       fontSize: '26px'
     };
-    return (<span class="review-stars" style={starStyle}>{score}</span>);
+    return (<span className="review-stars" style={starStyle}>{score}</span>);
   }
 }
 
