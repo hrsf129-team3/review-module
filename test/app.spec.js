@@ -75,6 +75,10 @@ describe('<ReviewContainer />', () => {
     waitForRender(wrapper).then(wrapper => expect(wrapper.containsMatchingElement(<Review />)).toEqual(true));
   })
 
+  it('should have <ReviewPagination /> as a subcomponent', () =>{
+    const waitForRender = createWaitForElement('.pagination');
+    waitForRender(wrapper).then(wrapper => expect(wrapper.containsMatchingElement('.pagination')).toEqual(true));
+  })
 
 });
 
