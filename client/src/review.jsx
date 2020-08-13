@@ -18,10 +18,10 @@ class Review extends React.Component {
     if(this.props.info.review_image === "null") {
       fullReview = <div>{this.props.info.review_text}</div>;
     } else {
-      console.log("This review has an image!");
+      //console.log("This review has an image!");
       fullReview = <div>{this.props.info.review_text}<img src={this.props.info.review_image}/></div>
     }
-    console.log(this.props.info);
+    //console.log(this.props.info);
     return (<div>
               <div><img src={avatar} /> {this.props.info.customer_name} {this.props.info.review_date}</div>
               <div><ReviewScore score={this.props.info.review_score}/></div>

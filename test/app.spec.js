@@ -3,8 +3,14 @@ import { shallow, mount, render } from 'enzyme';
 import Review from '../client/src/review.jsx';
 import ReviewScore from '../client/src/review_score.jsx';
 import ReviewContainer from '../client/src/review_container.jsx';
+import ReviewPagination from '../client/src/review_container.jsx';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import $ from 'jquery';
+import { createWaitForElement } from 'enzyme-wait';
+
+//mock Ajax requests for Review module
+jest.mock('jquery');
 
 configure({ adapter: new Adapter() });
 
@@ -35,6 +41,19 @@ let reviewWithImage = {
   shop_id: 2
 };
 
+//populate mock review array for testing
+let mockReviewList = [];
+
+for(let i = 0; i < 100; i++) {
+  if(i % 2 === 0) {
+    mockReviewList.push(reviewNoImage);
+  } else {
+    mockReviewList.push(reviewWithImage);
+  }
+}
+
+$.ajax.mockResolvedValue(mockReviewList);
+
 // component testing
 describe('<ReviewContainer />', () => {
 
@@ -49,6 +68,11 @@ describe('<ReviewContainer />', () => {
 
   it('should have <ReviewScore /> as a subcomponent', () => {
     expect(wrapper.containsMatchingElement(<ReviewScore />)).toEqual(true);
+  })
+
+  it('should have <Review /> as a subcomponent', () =>{
+    const waitForRender = createWaitForElement(<Review />);
+    waitForRender(wrapper).then(wrapper => expect(wrapper.containsMatchingElement(<Review />)).toEqual(true));
   })
 
 

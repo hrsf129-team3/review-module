@@ -144,7 +144,7 @@ class ReviewContainer extends React.Component {
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
-              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
+              <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
               <div>Photos from reviews</div>
               <img src={dummyCarousel}/>
             </div>);
@@ -218,4 +218,3 @@ class ReviewPagination extends React.Component {
 }
 
 export default ReviewContainer;
-
