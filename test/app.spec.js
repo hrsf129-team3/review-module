@@ -44,7 +44,7 @@ let reviewWithImage = {
 //populate mock review array for testing
 let mockReviewList = [];
 
-for(let i = 0; i < 100; i++) {
+for(let i = 0; i < 55; i++) {
   if(i % 2 === 0) {
     mockReviewList.push(reviewNoImage);
   } else {
@@ -78,6 +78,30 @@ describe('<ReviewContainer />', () => {
   it('should have <ReviewPagination /> as a subcomponent', () =>{
     const waitForRender = createWaitForElement('.pagination');
     waitForRender(wrapper).then(wrapper => expect(wrapper.containsMatchingElement('.pagination')).toEqual(true));
+  })
+
+  it('review count should match number of reviews retrieved from API call', () => {
+    const waitForRender = createWaitForElement(<Review />);
+    waitForRender(wrapper).then(wrapper => expect(wrapper.state.reviewCount).toEqual(55));
+  })
+
+  it('max pages should match expected page count', () => {
+    const waitForRender = createWaitForElement(<Review />);
+    waitForRender(wrapper).then(wrapper => expect(wrapper.state.maxPage).toEqual(14));
+  })
+
+  it('should correctly increment and decrement the current page when clicking the pagination arrows', () => {
+    const waitForRender = createWaitForElement('.pagination');
+    waitForRender(wrapper).then(wrapper => {
+      wrapper.find('.right-arrow').simulate('click', { preventDefault() {} });
+      expect(wrapper.state.currentPage).toEqual(1);
+      wrapper.find('.right-arrow').simulate('click', { preventDefault() {} }).simulate('click', { preventDefault() {} });
+      expect(wrapper.state.currentPage).toEqual(3);
+      wrapper.find('.left-arrow').simulate('click', { preventDefault() {} });
+      expect(wrapper.state.currentPage).toEqual(2);
+      wrapper.find('.left-arrow').simulate('click', { preventDefault() {} }).simulate('click', { preventDefault() {} }).simulate('click', { preventDefault() {} });
+      expect(wrapper.state.currentPage).toEqual(0);
+    });
   })
 
 });
