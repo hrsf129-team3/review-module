@@ -7,6 +7,8 @@ import ReviewScore from './review_score.jsx';
 //set max number of reviews displayed at any one time
 const maxReviewsPerPage = 4;
 
+const dummyCarousel='https://etsydoppleganger.s3-us-west-1.amazonaws.com/dummycarousel.jpeg';
+
 //container for the review module.
 class ReviewContainer extends React.Component {
   constructor(props) {
@@ -131,8 +133,8 @@ class ReviewContainer extends React.Component {
   }
 
   /*TBD:
-  -Add Sort By dropdown menu
-  -Placeholder image for image carousel
+  -Add Sort By dropdown menu for Recommended and Newest
+  -Dummy carousel should scale to the width of the component
   -CSS styling
   -Fade in/out animation when switching between pages
   */
@@ -142,18 +144,20 @@ class ReviewContainer extends React.Component {
     return (<div>
               <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
               {reviews}
-              <ReviewPagination currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
+              <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
+              <div>Photos from reviews</div>
+              <img src={dummyCarousel}/>
             </div>);
   }
 }
 
 
 //arrow SVGs for Pagination
-const rightArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
+const rightArrow = (<svg className="right-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
 <path d="M17.3 12.7l.7-.7-.7-.7-4-4c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l2.3 2.3H7c-.6 0-1 .4-1 1s.4 1 1 1h7.2l-2.3 2.3c-.2.2-.3.4-.3.7 0 .6.4 1 1 1 .3 0 .5-.1.7-.3l4-4z"></path>
 </svg>);
 
-const leftArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
+const leftArrow = (<svg className="left-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
 <path d="M6.7 11.3L6 12l.7.7 4 4c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L9.8 13H17c.6 0 1-.4 1-1s-.4-1-1-1H9.8l2.3-2.3c.2-.2.3-.4.3-.7 0-.6-.4-1-1-1-.3 0-.5.1-.7.3l-4 4z"></path>
 </svg>);
 
@@ -199,7 +203,7 @@ class ReviewPagination extends React.Component {
       results.push(<span onClick={this.props.to}>{this.props.maxPage - 1}</span>);
     }
     //finally, draw the last page number if there is more than one page
-    if(this.props.maxPage !== 1) {
+    if(this.props.maxPage > 2) {
       results.push(<span onClick={this.props.last}>{this.props.maxPage}</span>)
     }
 
@@ -214,4 +218,3 @@ class ReviewPagination extends React.Component {
 }
 
 export default ReviewContainer;
-
