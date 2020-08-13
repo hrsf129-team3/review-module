@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1597295402032" clover="3.2.0">
-  <project timestamp="1597295402032" name="All files">
+<coverage generated="1597296086897" clover="3.2.0">
+  <project timestamp="1597296086898" name="All files">
     <metrics statements="91" coveredstatements="64" conditionals="42" coveredconditionals="21" methods="21" coveredmethods="12" elements="154" coveredelements="97" complexity="0" loc="91" ncloc="91" packages="1" files="3" classes="3"/>
     <file name="review.jsx" path="/Users/reedbrooks/Desktop/Programming/HackReactor/front-end-capstone/client/src/review.jsx">
       <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>

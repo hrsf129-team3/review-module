@@ -54,7 +54,12 @@ for(let i = 0; i < 55; i++) {
 
 $.ajax.mockResolvedValue(mockReviewList);
 
-// component testing
+//component testing
+//RB's note: I'm not exactly sure how Jest is tracking which lines are being covered by the tests.
+//In particular, the review_container coverage report is claiming that getMaxReviews() is not being run/covered,
+//even though getMaxReviews() is called during componentDidMount execution and the tests would fail if it were broken.
+//Ditto next/previous page function calls, which are marked as being untested/not covered despite being bound as onClick functions
+//that are tested below.
 describe('<ReviewContainer />', () => {
 
   let wrapper;
@@ -93,7 +98,9 @@ describe('<ReviewContainer />', () => {
   it('should correctly increment and decrement the current page when clicking the pagination arrows', () => {
     const waitForRender = createWaitForElement('.pagination');
     waitForRender(wrapper).then(wrapper => {
+      jest.spyOn(wrapper.nextPage);
       wrapper.find('.right-arrow').simulate('click', { preventDefault() {} });
+      expect(wrapper.nextPage).toHaveBeenCalled();
       expect(wrapper.state.currentPage).toEqual(1);
       wrapper.find('.right-arrow').simulate('click', { preventDefault() {} }).simulate('click', { preventDefault() {} });
       expect(wrapper.state.currentPage).toEqual(3);
