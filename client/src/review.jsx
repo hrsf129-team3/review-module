@@ -1,6 +1,7 @@
 //This component contains an individual review.  Review details are passed in on this.props.info
 import React from 'react';
 import ReviewScore from './review_score.jsx';
+import moment from 'moment';
 import styles from './css/review_style.css';
 
 class Review extends React.Component {
@@ -16,6 +17,7 @@ class Review extends React.Component {
   render () {
     let avatar = (this.props.info.customer_avatar === null) ? 'https://etsydoppleganger.s3-us-west-1.amazonaws.com/noavatar.jpg' : this.props.info.customer_avatar;
     let fullReview = '';
+    let formatDate = moment(this.props.info.review_date, 'YYYY-MM-DD').format('MMM DD, YYYY');
     if(this.props.info.review_image === "null") {
       fullReview = <div>{this.props.info.review_text}</div>;
     } else {
@@ -24,7 +26,7 @@ class Review extends React.Component {
     }
     //console.log(this.props.info);
     return (<div>
-              <div className={styles.r1}><img src={avatar} className={styles.avatar}/> <a href="#">{this.props.info.customer_name}</a>&nbsp;{this.props.info.review_date}</div>
+              <div className={styles.r1}><img src={avatar} className={styles.avatar}/> <a href="#">{this.props.info.customer_name}</a>&nbsp;{formatDate}</div>
               <div className={styles.r2}>
                 <div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
                 {fullReview}
