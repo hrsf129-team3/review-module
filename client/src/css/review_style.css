@@ -7,6 +7,13 @@
   font-weight: 300;
   font-size: 13px;
   line-height: 18px;
+  margin-bottom: 6px !important;
+  color: #595959;
+}
+
+.r0 {
+  padding: 9px !important;
+  margin-bottom: 24px !important;
 }
 
 .r1 {
@@ -28,6 +35,10 @@
 }
 
 .r3 {
+  margin-bottom: 12px !important;
+}
+
+.r4 {
   margin-bottom: 12px !important;
 }
 
@@ -63,11 +74,6 @@ a:hover {
 
 a {
   transition: color 200ms ease-out;
-}
-
-p {
-  margin-bottom: 6px !important;
-  color: #595959;
 }
 
 .avatar {

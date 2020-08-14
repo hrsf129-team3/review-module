@@ -24,7 +24,7 @@ class Review extends React.Component {
       fullReview = <div>{this.props.info.review_text}<img src={this.props.info.review_image} className={styles.reviewimage}/></div>
     }
     //console.log(this.props.info);
-    return (<div>
+    return (<div className={styles.r0}>
               <div className={styles.r1}><img src={avatar} className={styles.avatar}/> <a href="#">{this.props.info.customer_name}</a>&nbsp;{formatDate}</div>
               <div className={styles.r2}>
                 <div className={styles.r3}><div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
