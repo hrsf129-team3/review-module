@@ -1,6 +1,7 @@
 //this module handles rendering the five star review scale for both individual and overall (average) review scores.
 //when calculating the overall review score, this should round to the nearest half star value (e.g. 4.3 to 4.5, 4.89 to 5).
 import React from 'react';
+import styles from './css/review_score_style.css';
 
 //constant declarations
 
