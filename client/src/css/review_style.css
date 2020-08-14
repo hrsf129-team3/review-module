@@ -2,6 +2,13 @@
   background-color: blue;
 }
 
+.smallText {
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
+}
+
 .r1 {
   display: flex;
   background-color: pink;
@@ -28,11 +35,17 @@
   margin-bottom: 6px !important;
 }
 
+.product {
+  display: flex !important;
+  align-items: center !important;
+}
+
 .thumbnail {
   height: 36px;
   width: 36px;
   border-radius: 6px;
   overflow: hidden;
+  margin-right: 12px;
 }
 
 .reviewimage {
@@ -50,6 +63,11 @@ a:hover {
 
 a {
   transition: color 200ms ease-out;
+}
+
+p {
+  margin-bottom: 6px !important;
+  color: #595959;
 }
 
 .avatar {

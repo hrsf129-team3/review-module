@@ -30,8 +30,8 @@ class Review extends React.Component {
                 <div className={styles.r3}><div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
                   <div>{fullReview}</div>
                 </div>
-                <p>Purchased item:</p>
-                <div><img src={this.props.info.product_thumbnail} className={styles.thumbnail}/> <a href="#">{this.props.info.product_name}</a></div>
+                <p className={styles.smallText}>Purchased item:</p>
+                <div className={styles.product}><img src={this.props.info.product_thumbnail} className={styles.thumbnail}/> <a href="#" className={styles.smallText}>{this.props.info.product_name}</a></div>
               </div>
             </div>);
   }
