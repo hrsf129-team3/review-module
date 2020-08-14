@@ -17,10 +17,18 @@
 .r2 {
   background-color: pink;
   padding-left: 48px;
+  margin-bottom: 6px;
 }
 
 .rating {
   margin-bottom: 6px !important;
+}
+
+.thumbnail {
+  height: 36px;
+  width: 36px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 a:link {

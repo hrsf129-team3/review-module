@@ -10,7 +10,6 @@ class Review extends React.Component {
   }
 
   /*TBD:
-  -change date to Etsy style (e.g. "Nov 5, 2019")
   -scale image in review (should be 300x300 in review block)
   -create popup when user clicks on review image, with larger review image, review, and purchased product
   */
@@ -31,7 +30,7 @@ class Review extends React.Component {
                 <div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
                 {fullReview}
                 <p>Purchased item:</p>
-                <div><img src={this.props.info.product_thumbnail}/> {this.props.info.product_name}</div>
+                <div><img src={this.props.info.product_thumbnail} className={styles.thumbnail}/> {this.props.info.product_name}</div>
               </div>
             </div>);
   }
