@@ -10,7 +10,7 @@ class Review extends React.Component {
   }
 
   /*TBD:
-  -scale image in review (should be 300x300 in review block)
+  -scale image in review
   -create popup when user clicks on review image, with larger review image, review, and purchased product
   */
   render () {
@@ -21,16 +21,17 @@ class Review extends React.Component {
       fullReview = <div>{this.props.info.review_text}</div>;
     } else {
       //console.log("This review has an image!");
-      fullReview = <div>{this.props.info.review_text}<img src={this.props.info.review_image}/></div>
+      fullReview = <div>{this.props.info.review_text}<img src={this.props.info.review_image} className={styles.reviewimage}/></div>
     }
     //console.log(this.props.info);
     return (<div>
               <div className={styles.r1}><img src={avatar} className={styles.avatar}/> <a href="#">{this.props.info.customer_name}</a>&nbsp;{formatDate}</div>
               <div className={styles.r2}>
-                <div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
-                {fullReview}
+                <div className={styles.r3}><div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
+                  <div>{fullReview}</div>
+                </div>
                 <p>Purchased item:</p>
-                <div><img src={this.props.info.product_thumbnail} className={styles.thumbnail}/> {this.props.info.product_name}</div>
+                <div><img src={this.props.info.product_thumbnail} className={styles.thumbnail}/> <a href="#">{this.props.info.product_name}</a></div>
               </div>
             </div>);
   }

@@ -26,7 +26,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 0,
+              importLoaders: 1,
               modules: true
             }
           }
