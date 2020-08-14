@@ -18,15 +18,17 @@ class Review extends React.Component {
     let fullReview = '';
     let formatDate = moment(this.props.info.review_date, 'YYYY-MM-DD').format('MMM D, YYYY');
     if(this.props.info.review_image === "null") {
-      fullReview = (<div>
+      fullReview = (<div className={styles.r3}>
                       <div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
-                      <div>{this.props.info.review_text}</div>
+                      <div className={styles.reviewText}>{this.props.info.review_text}</div>
                     </div>);
     } else {
       //console.log("This review has an image!");
-      fullReview = (<div>
-                      <div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
-                      <div>{this.props.info.review_text}</div>
+      fullReview = (<div className={styles.flex}>
+                      <div className={styles.r4}>
+                        <div className={styles.rating}><ReviewScore score={this.props.info.review_score}/></div>
+                        <div className={styles.reviewText}>{this.props.info.review_text}</div>
+                      </div>
                       <img src={this.props.info.review_image} className={styles.reviewimage}/>
                     </div>);
     }

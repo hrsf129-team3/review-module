@@ -7,6 +7,10 @@
   color: #595959;
 }
 
+.flex {
+  display: flex !important;
+}
+
 .r0 {
   padding: 9px !important;
   margin-bottom: 24px !important;
@@ -31,11 +35,16 @@
 }
 
 .r3 {
+  display: block;
+  position: relative;
   margin-bottom: 12px !important;
+  padding-right: 30px;
 }
 
 .r4 {
   margin-bottom: 12px !important;
+  flex: 3 1 0% !important;
+  margin-right: 48px;
 }
 
 .rating {
@@ -58,6 +67,17 @@
 .reviewimage {
   border-radius: 6px !important;
   overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+  flex: 1 1 0% !important;
+  align-items: flex-start;
+}
+
+.reviewText {
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 a:link {
@@ -70,6 +90,7 @@ a:hover {
 
 a {
   transition: color 200ms ease-out;
+  margin-right: 6px;
 }
 
 .avatar {
