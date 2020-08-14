@@ -3,11 +3,24 @@
 }
 
 .r1 {
-  background-color: blue;
+  display: flex;
+  background-color: pink;
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
+  color: #595959;
+  margin-bottom: 6px !important;
+  align-items: center !important;
 }
 
 .r2 {
-  background-color: yellow;
+  background-color: pink;
+  padding-left: 48px;
+}
+
+a:link {
+  color: #595959;
 }
 
 .avatar {
@@ -15,5 +28,6 @@
   width: 36px;
   border-radius: 50%;
   overflow: hidden;
+  margin-right: 12px;
 }
 
