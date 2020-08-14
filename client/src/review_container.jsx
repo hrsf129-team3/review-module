@@ -141,8 +141,9 @@ class ReviewContainer extends React.Component {
   render() {
     let oneCurrentPage = this.state.currentPage + 1;
     let reviews = this.getReviews();
+    let dropdown = <button>Sort By Placeholder</button>;
     return (<div>
-              <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
+              <div>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/> <span className="dropdown">{dropdown}</span></div>
               {reviews}
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
               <div>Photos from reviews</div>
