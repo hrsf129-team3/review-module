@@ -19,6 +19,10 @@
   padding-left: 48px;
 }
 
+.rating {
+  margin-bottom: 6px !important;
+}
+
 a:link {
   color: #595959;
 }
