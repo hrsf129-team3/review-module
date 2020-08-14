@@ -20,15 +20,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: SRC_DIR,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
+              importLoaders: 0,
               modules: true
             }
           }
         ]
+      }
+    ]
   }
 };

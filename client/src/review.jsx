@@ -1,6 +1,7 @@
 //This component contains an individual review.  Review details are passed in on this.props.info
 import React from 'react';
 import ReviewScore from './review_score.jsx';
+import styles from './css/review_style.css';
 
 class Review extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Review extends React.Component {
       fullReview = <div>{this.props.info.review_text}<img src={this.props.info.review_image}/></div>
     }
     //console.log(this.props.info);
-    return (<div>
+    return (<div className={styles.test}>
               <div><img src={avatar} /> {this.props.info.customer_name} {this.props.info.review_date}</div>
               <div><ReviewScore score={this.props.info.review_score}/></div>
               {fullReview}
