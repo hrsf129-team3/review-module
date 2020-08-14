@@ -17,7 +17,7 @@ class Review extends React.Component {
   render () {
     let avatar = (this.props.info.customer_avatar === null) ? 'https://etsydoppleganger.s3-us-west-1.amazonaws.com/noavatar.jpg' : this.props.info.customer_avatar;
     let fullReview = '';
-    let formatDate = moment(this.props.info.review_date, 'YYYY-MM-DD').format('MMM DD, YYYY');
+    let formatDate = moment(this.props.info.review_date, 'YYYY-MM-DD').format('MMM D, YYYY');
     if(this.props.info.review_image === "null") {
       fullReview = <div>{this.props.info.review_text}</div>;
     } else {
