@@ -24,11 +24,13 @@ class Review extends React.Component {
     }
     //console.log(this.props.info);
     return (<div>
-              <div><img src={avatar} className={styles.avatar}/> {this.props.info.customer_name} {this.props.info.review_date}</div>
-              <div><ReviewScore score={this.props.info.review_score}/></div>
-              {fullReview}
-              <p>Purchased item:</p>
-              <div><img src={this.props.info.product_thumbnail}/> {this.props.info.product_name}</div>
+              <div className={styles.r1}><img src={avatar} className={styles.avatar}/> {this.props.info.customer_name} {this.props.info.review_date}</div>
+              <div className={styles.r2}>
+                <div><ReviewScore score={this.props.info.review_score}/></div>
+                {fullReview}
+                <p>Purchased item:</p>
+                <div><img src={this.props.info.product_thumbnail}/> {this.props.info.product_name}</div>
+              </div>
             </div>);
   }
 }

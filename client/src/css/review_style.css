@@ -2,9 +2,18 @@
   background-color: blue;
 }
 
+.r1 {
+  background-color: blue;
+}
+
+.r2 {
+  background-color: yellow;
+}
+
 .avatar {
   height: 36px;
   width: 36px;
   border-radius: 50%;
   overflow: hidden;
 }
+
