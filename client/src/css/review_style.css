@@ -18,7 +18,6 @@
 
 .r1 {
   display: flex;
-  background-color: pink;
   font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
   font-weight: 300;
   font-size: 13px;
@@ -29,7 +28,6 @@
 }
 
 .r2 {
-  background-color: pink;
   padding-left: 48px;
   margin-bottom: 6px;
 }
