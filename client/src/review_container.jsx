@@ -250,10 +250,11 @@ class Dropdown extends React.Component {
     let dropdownTop = document.getElementById('dropdown-top');
     if(menu.style.display === "block") {
       menu.style.display = "none";
-      dropdownTop.style.borderBottomLeftRadius = "24px";
-      dropdownTop.style.borderBottomRightRadius = "24px";
+      dropdownTop.style.borderRadius = "24px";
     } else {
       menu.style.display = "block";
+      dropdownTop.style.borderTopLeftRadius = "12px";
+      dropdownTop.style.borderTopRightRadius = "12px";
       dropdownTop.style.borderBottomLeftRadius = "0px";
       dropdownTop.style.borderBottomRightRadius = "0px";
     }
@@ -261,7 +262,7 @@ class Dropdown extends React.Component {
 
   render () {
     return (<div className={styles.dropdown}>
-              <div className={styles.dropdownContainer}>
+              <div className={styles.dropdownContainer} id="dropdown-container">
                 <span onClick={this.openDropdown} className={styles.dropdownTop} id="dropdown-top">Sort By: Recommended {dropdownArrow}</span>
                   <div className={styles.dropdownOptions} id="dropdown-items">
                     <span className={styles.optionrec} id="recommended" onClick={this.getRecommended}>Recommended</span>
