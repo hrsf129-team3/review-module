@@ -223,7 +223,7 @@ class ReviewPagination extends React.Component {
 }
 
 //arrow for dropdown menu
-const dropdownArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="24" width="24"><polygon points="16.5 10 12 16 7.5 10 16.5 10"></polygon></svg>)
+const dropdownArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="24" width="24" className={styles.dropdownArrow}><polygon points="16.5 10 12 16 7.5 10 16.5 10"></polygon></svg>)
 
 class Dropdown extends React.Component {
   constructor(props) {
