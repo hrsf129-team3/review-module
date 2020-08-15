@@ -32,7 +32,9 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  margin-top: 6px;
+  margin-top: 12px;
+  justify-content: flex-end;
+  align-self: center;
   /*
   font-size: 13px;
   line-height: 1.4;
