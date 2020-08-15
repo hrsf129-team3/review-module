@@ -13,9 +13,16 @@ app.use(express.static(__dirname + '/../client/production'));
 //helper function declarations
 
 //API declarations
-//checks database for reviews and returns results
+//checks database for reviews and returns results.  This sorts by "recommended" reviews.
 app.get('/reviews', function(req, res) {
   db.getReviews(function(results) {
+    console.log(results);
+    res.send(results);
+  })
+});
+
+app.get('/newest', function(req, res) {
+  db.getReviewsByNewest(function(results) {
     console.log(results);
     res.send(results);
   })
