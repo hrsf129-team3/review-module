@@ -150,7 +150,7 @@ class ReviewContainer extends React.Component {
               </div>
               {reviews}
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
-              <div>Photos from reviews</div>
+              <div className={styles.fromReviews}>Photos from reviews</div>
               <img src={dummyCarousel} className={styles.dummyCarousel}/>
             </div>);
   }

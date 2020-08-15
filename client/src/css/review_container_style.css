@@ -99,8 +99,17 @@
   vertical-align: sub;
 }
 
+.fromReviews {
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 28px;
+  margin-bottom: 12px;
+}
+
 .dummyCarousel {
   display: flex;
   width: 100%;
   height: auto;
+  margin-bottom: 48px;
 }
