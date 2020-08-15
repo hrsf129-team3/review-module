@@ -146,7 +146,7 @@ class ReviewContainer extends React.Component {
     return (<div className={styles.container}>
               <div className={styles.header}>
                 <div className={styles.reviewSummary}>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore} className={styles.headerRating}/></div>
-                <span className={styles.dropdown}><Dropdown /></span>
+                <Dropdown />
               </div>
               {reviews}
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
@@ -234,16 +234,23 @@ class Dropdown extends React.Component {
   }
 
   openDropdown() {
-    document.getElementById('dropdown-items').style.display = "block";
+    let menu = document.getElementById('dropdown-items');
+    if(menu.style.display === "none") {
+      menu.style.display = "flex";
+    } else {
+      menu.style.display = "none";
+    }
   }
 
   render () {
-    return (<div>
-              <button onClick={this.openDropdown}>Sort By: Recommended {dropdownArrow}</button>
-                <div className={styles.dropdownOptions} id="dropdown-items">
-                  <button className={styles.options}>Recommended</button>
-                  <button className={styles.options}>Newest</button>
-                </div>
+    return (<div className={styles.dropdown}>
+              <div className={styles.dropdownContainer}>
+                <div onClick={this.openDropdown} className={styles.dropdownTop}>Sort By: Recommended {dropdownArrow}</div>
+                  <div className={styles.dropdownOptions} id="dropdown-items">
+                    <div className={styles.options} id="recommended">Recommended</div>
+                    <div className={styles.options} id="newest">Newest</div>
+                  </div>
+              </div>
             </div>);
   }
 }
