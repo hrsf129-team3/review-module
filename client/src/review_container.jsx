@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Review from './review.jsx';
 import ReviewScore from './review_score.jsx';
-import styles from './css/review_style.css';
+import styles from './css/review_container_style.css';
 
 //set max number of reviews displayed at any one time
 const maxReviewsPerPage = 4;
@@ -143,8 +143,11 @@ class ReviewContainer extends React.Component {
     let oneCurrentPage = this.state.currentPage + 1;
     let reviews = this.getReviews();
     let dropdown = <button>Sort By Placeholder</button>;
-    return (<div>
-              <div>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/> <span className="dropdown">{dropdown}</span></div>
+    return (<div className={styles.container}>
+              <div className={styles.header}>
+                <div className={styles.reviewSummary}>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore} className={styles.headerRating}/></div>
+                <span className={styles.dropdown}>{dropdown}</span>
+              </div>
               {reviews}
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
               <div>Photos from reviews</div>
@@ -183,10 +186,10 @@ class ReviewPagination extends React.Component {
   getPages() {
     let results = [];
     //render first page, then conditionally render from here
-    results.push(<span onClick={this.props.first}>1</span>);
+    results.push(<span onClick={this.props.first} className={styles.pageButton}><span className={styles.pageOne}>1</span></span>);
     //if current page is 1 or 2, add a 2 to the page list
     if(this.props.currentPage <= 2) {
-      results.push(<span onClick={this.props.to}>2</span>);
+      results.push(<span onClick={this.props.to} className={styles.pageButton}>2</span>);
     }
     //if current page is greater than two (and max page count is also greater than 2), add an ellipsis
     if(this.props.currentPage > 2 && this.props.maxPage > 2) {
@@ -195,18 +198,18 @@ class ReviewPagination extends React.Component {
     //if current page is not the last/second to last page, add the current page number to the page list.
     //also, add another ellipsis while we're here
     if(this.props.currentPage < this.props.maxPage -1 && this.props.currentPage > 2) {
-      results.push(<span>{this.props.currentPage}</span>);
+      results.push(<span className={styles.pageButton}>{this.props.currentPage}</span>);
     }
     if(this.props.currentPage < this.props.maxPage - 1) {
       results.push(<span>...</span>);
     }
     //if current page is second to last or last, add it to page list
     if(this.props.currentPage >= this.props.maxPage - 1) {
-      results.push(<span onClick={this.props.to}>{this.props.maxPage - 1}</span>);
+      results.push(<span onClick={this.props.to} className={styles.pageButton}>{this.props.maxPage - 1}</span>);
     }
     //finally, draw the last page number if there is more than one page
     if(this.props.maxPage > 2) {
-      results.push(<span onClick={this.props.last}>{this.props.maxPage}</span>)
+      results.push(<span onClick={this.props.last} className={styles.pageButton}>{this.props.maxPage}</span>)
     }
 
     return results;
@@ -215,7 +218,7 @@ class ReviewPagination extends React.Component {
 
   render() {
     let pages = this.getPages();
-    return (<div><span onClick={this.props.previous}>{leftArrow}</span>{pages}<span onClick={this.props.next}>{rightArrow}</span></div>);
+    return (<div className={styles.pagination}><span onClick={this.props.previous} className={styles.pageArrow}>{leftArrow}</span>{pages}<span onClick={this.props.next} className={styles.pageArrow}>{rightArrow}</span></div>);
   }
 }
 
