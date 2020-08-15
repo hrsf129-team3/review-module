@@ -248,14 +248,14 @@ class Dropdown extends React.Component {
   openDropdown() {
     let menu = document.getElementById('dropdown-items');
     let dropdownTop = document.getElementById('dropdown-top');
-    if(menu.style.display === "none") {
-      menu.style.display = "block";
-      dropdownTop.style.borderBottomLeftRadius = "0px";
-      dropdownTop.style.borderBottomRightRadius = "0px";
-    } else {
+    if(menu.style.display === "block") {
       menu.style.display = "none";
       dropdownTop.style.borderBottomLeftRadius = "24px";
       dropdownTop.style.borderBottomRightRadius = "24px";
+    } else {
+      menu.style.display = "block";
+      dropdownTop.style.borderBottomLeftRadius = "0px";
+      dropdownTop.style.borderBottomRightRadius = "0px";
     }
   }
 
