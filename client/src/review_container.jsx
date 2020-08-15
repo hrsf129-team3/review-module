@@ -247,8 +247,8 @@ class Dropdown extends React.Component {
               <div className={styles.dropdownContainer}>
                 <span onClick={this.openDropdown} className={styles.dropdownTop}>Sort By: Recommended {dropdownArrow}</span>
                   <div className={styles.dropdownOptions} id="dropdown-items">
-                    <span className={styles.options} id="recommended">Recommended</span>
-                    <span className={styles.options} id="newest">Newest</span>
+                    <span className={styles.optionrec} id="recommended">Recommended</span>
+                    <span className={styles.optionnew} id="newest">Newest</span>
                   </div>
               </div>
             </div>);
