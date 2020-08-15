@@ -52,7 +52,7 @@
   cursor: pointer;
   display: inline-block;
   border-radius: 24px;
-  background-color: #a1a1a1;
+  background-color: #ededed;
   margin-right: 6px;
   font-size: 13px;
   font-weight: bold;
@@ -71,7 +71,7 @@
 .pageArrow {
   cursor: pointer;
   border-radius: 24px;
-  background-color: #a1a1a1;
+  background-color: #ededed;
   margin-right: 6px;
   line-height: 1;
   min-height: 36px;
@@ -79,6 +79,14 @@
   padding: 9px;
   position: relative;
   box-sizing: border-box;
+}
+
+.pageButton:hover, .pageArrow:hover {
+  background-color: #a1a1a1;
+}
+
+.pageButton, .pageArrow {
+  transition: color 200ms ease-out;
 }
 
 .arrow {
