@@ -193,7 +193,7 @@ class ReviewPagination extends React.Component {
     }
     //if current page is greater than two (and max page count is also greater than 2), add an ellipsis
     if(this.props.currentPage > 2 && this.props.maxPage > 2) {
-      results.push(<span>...</span>);
+      results.push(<span className={styles.ellipses}>...</span>);
     }
     //if current page is not the last/second to last page, add the current page number to the page list.
     //also, add another ellipsis while we're here
@@ -201,7 +201,7 @@ class ReviewPagination extends React.Component {
       results.push(<span className={styles.pageButton}>{this.props.currentPage}</span>);
     }
     if(this.props.currentPage < this.props.maxPage - 1) {
-      results.push(<span>...</span>);
+      results.push(<span className={styles.ellipses}>...</span>);
     }
     //if current page is second to last or last, add it to page list
     if(this.props.currentPage >= this.props.maxPage - 1) {

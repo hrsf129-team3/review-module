@@ -48,6 +48,12 @@
   color: #222;
 }
 
+.ellipses {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-right: 6px;
+}
+
 .pageButton {
   cursor: pointer;
   display: inline-block;
