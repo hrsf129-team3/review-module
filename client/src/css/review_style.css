@@ -86,6 +86,10 @@ a:hover {
   color: #a8a8a8;
 }
 
+a:visited {
+  color: #595959;
+}
+
 a {
   transition: color 200ms ease-out;
   margin-right: 6px;

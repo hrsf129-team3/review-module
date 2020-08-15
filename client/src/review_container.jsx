@@ -284,6 +284,7 @@ class Dropdown extends React.Component {
     };
     this.getRecommended = this.getRecommended.bind(this);
     this.getNewest = this.getNewest.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   //helper function for dropdown: gets reviews sorted by "recommeneded"
@@ -315,6 +316,16 @@ class Dropdown extends React.Component {
       dropdownTop.style.borderBottomLeftRadius = "0px";
       dropdownTop.style.borderBottomRightRadius = "0px";
     }
+  }
+
+  //helper function that always sets dropdown to its closed state.
+  //should be used with a listener that checks to see if a user clicks outside of the menu
+  closeDropdown() {
+    let menu = document.getElementById('dropdown-items');
+    let dropdownTop = document.getElementById('dropdown-top');
+
+    menu.style.display = "none";
+    dropdownTop.style.borderRadius = "24px";
   }
 
   render () {
