@@ -59,10 +59,48 @@ class ReviewContainer extends React.Component {
   //helper functions to download reviews: should be passed to dropdown element
   reviewsByRecommended() {
     console.log("Sorting reviews by recommended...");
+    $.ajax({
+      method: 'GET',
+      url: '/reviews',
+      success: ((response) => {
+        this.setState({
+          reviews: response,
+          currentPage: 0
+        });
+        this.setState({
+          reviewCount: this.state.reviews.length,
+          averageScore: this.getAverageScore(),
+          maxPage: this.getMaxPages(this.state.reviews.length)
+        });
+        console.log(this.state.reviewCount);
+      }),
+      error: ((error)=> {
+        console.log(error);
+      })
+    });
   }
 
   reviewsByNewest() {
     console.log("Sorting reviews by newest...");
+    $.ajax({
+      method: 'GET',
+      url: '/newest',
+      success: ((response) => {
+        this.setState({
+          reviews: response,
+          currentPage: 0
+        });
+        this.setState({
+          reviewCount: this.state.reviews.length,
+          averageScore: this.getAverageScore(),
+          maxPage: this.getMaxPages(this.state.reviews.length)
+        });
+        console.log(this.state.reviewCount);
+      }),
+      error: ((error)=> {
+        console.log(error);
+      })
+    });
   }
 
   //componentDidMount helper function: calculates the average score of all reviews
