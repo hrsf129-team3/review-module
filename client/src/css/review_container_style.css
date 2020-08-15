@@ -27,7 +27,11 @@
   line-height: 42px;
 }
 
+/*dropdown sort by menu*/
+
 .dropdown {
+  position: relative;
+  display: flex;
   margin-top: 6px;
   justify-content: flex-end;
   font-size: 13px;
@@ -41,6 +45,18 @@
   font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
 }
 
+.dropdownOptions {
+  display: none;
+  min-width: 100%;
+  position: absolute;
+  z-index: 50;
+}
+
+.options {
+  min-width: 100%;
+}
+
+/*Pagination buttons*/
 
 .pagination {
   margin-bottom: 36px !important;
@@ -98,6 +114,8 @@
 .arrow {
   vertical-align: sub;
 }
+
+/*Placeholder carousel*/
 
 .fromReviews {
   font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;

@@ -228,10 +228,23 @@ const dropdownArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 2
 class Dropdown extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selected: 'Recommended'
+    };
+  }
+
+  openDropdown() {
+    document.getElementById('dropdown-items').style.display = "block";
   }
 
   render () {
-    return <button>Sort By Placeholder {dropdownArrow}</button>;
+    return (<div>
+              <button onClick={this.openDropdown}>Sort By: Recommended {dropdownArrow}</button>
+                <div className={styles.dropdownOptions} id="dropdown-items">
+                  <button className={styles.options}>Recommended</button>
+                  <button className={styles.options}>Newest</button>
+                </div>
+            </div>);
   }
 }
 

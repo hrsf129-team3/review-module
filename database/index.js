@@ -15,4 +15,15 @@ var getReviews = function(callback) {
   });
 }
 
+var getReviewsByNewest = function(callback) {
+  console.log("Fetching reviews...");
+  db.query(`select * from review_info order by review_date desc`, function(error, results) {
+    if(error) {
+      console.log(error);
+    } else {
+      callback(results);
+    }
+  });
+}
+
 module.exports.getReviews = getReviews;
