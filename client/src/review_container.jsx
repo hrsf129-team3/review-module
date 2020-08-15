@@ -291,6 +291,7 @@ class Dropdown extends React.Component {
     this.props.recommended();
     let dropdownTop = document.getElementById('dropdown-top');
     dropdownTop.innerHTML = "Sort By: Recommended";
+    this.toggleDropdown();
   }
 
   //helper function for dropdown: gets reviews sorted by most recent date
@@ -298,9 +299,10 @@ class Dropdown extends React.Component {
     this.props.newest();
     let dropdownTop = document.getElementById('dropdown-top');
     dropdownTop.innerHTML = "Sort By: Newest";
+    this.toggleDropdown();
   }
 
-  openDropdown() {
+  toggleDropdown() {
     let menu = document.getElementById('dropdown-items');
     let dropdownTop = document.getElementById('dropdown-top');
     if(menu.style.display === "block") {
@@ -318,7 +320,7 @@ class Dropdown extends React.Component {
   render () {
     return (<div className={styles.dropdown}>
               <div className={styles.dropdownContainer} id="dropdown-container">
-                <span onClick={this.openDropdown} className={styles.dropdownTop} id="dropdown-top">Sort By: Recommended {dropdownArrow}</span>
+                <span onClick={this.toggleDropdown} className={styles.dropdownTop} id="dropdown-top">Sort By: Recommended {dropdownArrow}</span>
                   <div className={styles.dropdownOptions} id="dropdown-items">
                     <span className={styles.optionrec} id="recommended" onClick={this.getRecommended}>Recommended</span>
                     <span className={styles.optionnew} id="newest" onClick={this.getNewest}>Newest</span>
