@@ -142,11 +142,11 @@ class ReviewContainer extends React.Component {
   render() {
     let oneCurrentPage = this.state.currentPage + 1;
     let reviews = this.getReviews();
-    let dropdown = <button>Sort By Placeholder</button>;
+    //let dropdown = <button>Sort By Placeholder</button>;
     return (<div className={styles.container}>
               <div className={styles.header}>
                 <div className={styles.reviewSummary}>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore} className={styles.headerRating}/></div>
-                <span className={styles.dropdown}>{dropdown}</span>
+                <span className={styles.dropdown}><Dropdown /></span>
               </div>
               {reviews}
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
@@ -219,6 +219,19 @@ class ReviewPagination extends React.Component {
   render() {
     let pages = this.getPages();
     return (<div className={styles.pagination}><span onClick={this.props.previous} className={styles.pageArrow}>{leftArrow}</span>{pages}<span onClick={this.props.next} className={styles.pageArrow}>{rightArrow}</span></div>);
+  }
+}
+
+//arrow for dropdown menu
+const dropdownArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="24" width="24"><polygon points="16.5 10 12 16 7.5 10 16.5 10"></polygon></svg>)
+
+class Dropdown extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return <button>Sort By Placeholder {dropdownArrow}</button>;
   }
 }
 
