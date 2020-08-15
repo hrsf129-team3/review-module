@@ -236,7 +236,7 @@ class Dropdown extends React.Component {
   openDropdown() {
     let menu = document.getElementById('dropdown-items');
     if(menu.style.display === "none") {
-      menu.style.display = "flex";
+      menu.style.display = "block";
     } else {
       menu.style.display = "none";
     }
@@ -245,10 +245,10 @@ class Dropdown extends React.Component {
   render () {
     return (<div className={styles.dropdown}>
               <div className={styles.dropdownContainer}>
-                <div onClick={this.openDropdown} className={styles.dropdownTop}>Sort By: Recommended {dropdownArrow}</div>
+                <span onClick={this.openDropdown} className={styles.dropdownTop}>Sort By: Recommended {dropdownArrow}</span>
                   <div className={styles.dropdownOptions} id="dropdown-items">
-                    <div className={styles.options} id="recommended">Recommended</div>
-                    <div className={styles.options} id="newest">Newest</div>
+                    <span className={styles.options} id="recommended">Recommended</span>
+                    <span className={styles.options} id="newest">Newest</span>
                   </div>
               </div>
             </div>);
