@@ -22,6 +22,8 @@ class ReviewContainer extends React.Component {
       averageScore: 0
     };
 
+    this.reviewsByRecommended = this.reviewsByRecommended.bind(this);
+    this.reviewsByNewest = this.reviewsByNewest.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.getAverageScore = this.getAverageScore.bind(this);
     this.getMaxPages = this.getMaxPages.bind(this);
@@ -52,6 +54,15 @@ class ReviewContainer extends React.Component {
         console.log(error);
       })
     });
+  }
+
+  //helper functions to download reviews: should be passed to dropdown element
+  reviewsByRecommended() {
+    console.log("Sorting reviews by recommended...");
+  }
+
+  reviewsByNewest() {
+    console.log("Sorting reviews by newest...");
   }
 
   //componentDidMount helper function: calculates the average score of all reviews
@@ -146,7 +157,7 @@ class ReviewContainer extends React.Component {
     return (<div className={styles.container}>
               <div className={styles.header}>
                 <div className={styles.reviewSummary}>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore} className={styles.headerRating}/></div>
-                <Dropdown />
+                <Dropdown recommended={this.reviewsByRecommended} newest={this.reviewsByNewest}/>
               </div>
               {reviews}
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
@@ -225,22 +236,28 @@ class ReviewPagination extends React.Component {
 //arrow for dropdown menu
 const dropdownArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="24" width="24" className={styles.dropdownArrow}><polygon points="16.5 10 12 16 7.5 10 16.5 10"></polygon></svg>)
 
+//dropdown menu sorts reviews by either Recommended or Newest.
+//Functions to sort reviews should come in on this.props.recommended or this.props.newest
 class Dropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selected: 'Recommended'
     };
+    this.getRecommended = this.getRecommended.bind(this);
+    this.getNewest = this.getNewest.bind(this);
   }
 
   //helper function for dropdown: gets reviews sorted by "recommeneded"
   getRecommended() {
+    this.props.recommended();
     let dropdownTop = document.getElementById('dropdown-top');
     dropdownTop.innerHTML = "Sort By: Recommended";
   }
 
   //helper function for dropdown: gets reviews sorted by most recent date
   getNewest () {
+    this.props.newest();
     let dropdownTop = document.getElementById('dropdown-top');
     dropdownTop.innerHTML = "Sort By: Newest";
   }
