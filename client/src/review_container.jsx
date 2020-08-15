@@ -233,6 +233,18 @@ class Dropdown extends React.Component {
     };
   }
 
+  //helper function for dropdown: gets reviews sorted by "recommeneded"
+  getRecommended() {
+    let dropdownTop = document.getElementById('dropdown-top');
+    dropdownTop.innerHTML = "Sort By: Recommended";
+  }
+
+  //helper function for dropdown: gets reviews sorted by most recent date
+  getNewest () {
+    let dropdownTop = document.getElementById('dropdown-top');
+    dropdownTop.innerHTML = "Sort By: Newest";
+  }
+
   openDropdown() {
     let menu = document.getElementById('dropdown-items');
     let dropdownTop = document.getElementById('dropdown-top');
@@ -252,8 +264,8 @@ class Dropdown extends React.Component {
               <div className={styles.dropdownContainer}>
                 <span onClick={this.openDropdown} className={styles.dropdownTop} id="dropdown-top">Sort By: Recommended {dropdownArrow}</span>
                   <div className={styles.dropdownOptions} id="dropdown-items">
-                    <span className={styles.optionrec} id="recommended">Recommended</span>
-                    <span className={styles.optionnew} id="newest">Newest</span>
+                    <span className={styles.optionrec} id="recommended" onClick={this.getRecommended}>Recommended</span>
+                    <span className={styles.optionnew} id="newest" onClick={this.getNewest}>Newest</span>
                   </div>
               </div>
             </div>);
