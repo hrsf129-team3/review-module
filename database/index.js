@@ -27,3 +27,4 @@ var getReviewsByNewest = function(callback) {
 }
 
 module.exports.getReviews = getReviews;
+module.exports.getReviewsByNewest = getReviewsByNewest;
