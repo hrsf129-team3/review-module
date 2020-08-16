@@ -275,6 +275,23 @@ class Dropdown extends React.Component {
     this.getRecommended = this.getRecommended.bind(this);
     this.getNewest = this.getNewest.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('click', (event) => {
+      if(!event.target.matches('#dropdown-container span') && !(event.target.matches('#dropdown-container svg'))) {
+        this.closeDropdown();
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', (event) => {
+      if(!event.target.matches('#dropdown-container span') && !(event.target.matches('#dropdown-container svg'))) {
+        this.closeDropdown();
+      }
+    });
   }
 
   //helper function for dropdown: gets reviews sorted by "recommeneded"
