@@ -54,7 +54,6 @@
 
 .dropdownTop {
   cursor: pointer;
-  background-color: red;
   font-size: 13px;
   line-height: 1.4;
   min-height: 36px;
@@ -70,6 +69,7 @@
   min-width: 100%;
 }
 
+
 .dropdownArrow {
   display: inline-block;
   vertical-align: middle;
@@ -84,7 +84,6 @@
 }
 
 .optionrec, .optionnew {
-  background-color: yellow;
   display: block;
   cursor: pointer;
   align-items: center;
@@ -102,7 +101,7 @@
   border-bottom-right-radius: 12px;
 }
 
-.optionrec:hover, .optionnew:hover {
+.dropdownTop:hover, .optionrec:hover, .optionnew:hover {
   background-color: #ededed;
 }
 

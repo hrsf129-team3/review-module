@@ -59,6 +59,7 @@ class ReviewContainer extends React.Component {
   //helper functions to download reviews: should be passed to dropdown element
   reviewsByRecommended() {
     console.log("Sorting reviews by recommended...");
+    $("#review-items").fadeOut(50);
     $.ajax({
       method: 'GET',
       url: '/reviews',
@@ -67,12 +68,7 @@ class ReviewContainer extends React.Component {
           reviews: response,
           currentPage: 0
         });
-        this.setState({
-          reviewCount: this.state.reviews.length,
-          averageScore: this.getAverageScore(),
-          maxPage: this.getMaxPages(this.state.reviews.length)
-        });
-        console.log(this.state.reviewCount);
+        $("#review-items").fadeIn(200);
       }),
       error: ((error)=> {
         console.log(error);
@@ -82,6 +78,7 @@ class ReviewContainer extends React.Component {
 
   reviewsByNewest() {
     console.log("Sorting reviews by newest...");
+    $("#review-items").fadeOut(50);
     $.ajax({
       method: 'GET',
       url: '/newest',
@@ -90,12 +87,7 @@ class ReviewContainer extends React.Component {
           reviews: response,
           currentPage: 0
         });
-        this.setState({
-          reviewCount: this.state.reviews.length,
-          averageScore: this.getAverageScore(),
-          maxPage: this.getMaxPages(this.state.reviews.length)
-        });
-        console.log(this.state.reviewCount);
+        $("#review-items").fadeIn(200);
       }),
       error: ((error)=> {
         console.log(error);
@@ -117,6 +109,7 @@ class ReviewContainer extends React.Component {
   //and returns the completed script.
   getReviews() {
     console.log("Updating reviews for page...");
+    $("#review-items").fadeOut(50);
     let position = this.state.currentPage * maxReviewsPerPage;
     let endPosition = (position + maxReviewsPerPage > this.state.reviews.length) ? this.state.reviews.length : position + maxReviewsPerPage;
     let result = [];
@@ -124,6 +117,7 @@ class ReviewContainer extends React.Component {
       result.push(<Review info={this.state.reviews[i]}/>);
     }
 
+    $("#review-items").fadeIn(200);
     return result;
   }
 
@@ -197,7 +191,7 @@ class ReviewContainer extends React.Component {
                 <div className={styles.reviewSummary}>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore} className={styles.headerRating}/></div>
                 <Dropdown recommended={this.reviewsByRecommended} newest={this.reviewsByNewest}/>
               </div>
-              {reviews}
+              <div id="review-items">{reviews}</div>
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
               <div className={styles.fromReviews}>Photos from reviews</div>
               <img src={dummyCarousel} className={styles.dummyCarousel}/>
