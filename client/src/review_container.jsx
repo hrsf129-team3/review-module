@@ -176,12 +176,6 @@ class ReviewContainer extends React.Component {
     }
   }
 
-  /*TBD:
-  -Add Sort By dropdown menu for Recommended and Newest
-  -Dummy carousel should scale to the width of the component
-  -CSS styling
-  -Fade in/out animation when switching between pages
-  */
   render() {
     let oneCurrentPage = this.state.currentPage + 1;
     let reviews = this.getReviews();
@@ -258,7 +252,9 @@ class ReviewPagination extends React.Component {
     return results;
   }
 
-
+  /*TBD:
+    -additional CSS styling
+  */
   render() {
     let pages = this.getPages();
     return (<div className={styles.pagination}><span onClick={this.props.previous} className={styles.pageArrow}>{leftArrow}</span>{pages}<span onClick={this.props.next} className={styles.pageArrow}>{rightArrow}</span></div>);
