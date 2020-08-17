@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Review from './review.jsx';
 import ReviewScore from './review_score.jsx';
+import styles from './css/review_container_style.css';
 
 //set max number of reviews displayed at any one time
 const maxReviewsPerPage = 4;
@@ -21,6 +22,8 @@ class ReviewContainer extends React.Component {
       averageScore: 0
     };
 
+    this.reviewsByRecommended = this.reviewsByRecommended.bind(this);
+    this.reviewsByNewest = this.reviewsByNewest.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.getAverageScore = this.getAverageScore.bind(this);
     this.getMaxPages = this.getMaxPages.bind(this);
@@ -53,6 +56,45 @@ class ReviewContainer extends React.Component {
     });
   }
 
+  //helper functions to download reviews: should be passed to dropdown element
+  reviewsByRecommended() {
+    console.log("Sorting reviews by recommended...");
+    $("#review-items").fadeOut(50);
+    $.ajax({
+      method: 'GET',
+      url: '/reviews',
+      success: ((response) => {
+        this.setState({
+          reviews: response,
+          currentPage: 0
+        });
+        $("#review-items").fadeIn(200);
+      }),
+      error: ((error)=> {
+        console.log(error);
+      })
+    });
+  }
+
+  reviewsByNewest() {
+    console.log("Sorting reviews by newest...");
+    $("#review-items").fadeOut(50);
+    $.ajax({
+      method: 'GET',
+      url: '/newest',
+      success: ((response) => {
+        this.setState({
+          reviews: response,
+          currentPage: 0
+        });
+        $("#review-items").fadeIn(200);
+      }),
+      error: ((error)=> {
+        console.log(error);
+      })
+    });
+  }
+
   //componentDidMount helper function: calculates the average score of all reviews
   //stored in state
   getAverageScore() {
@@ -67,6 +109,7 @@ class ReviewContainer extends React.Component {
   //and returns the completed script.
   getReviews() {
     console.log("Updating reviews for page...");
+    $("#review-items").fadeOut(50);
     let position = this.state.currentPage * maxReviewsPerPage;
     let endPosition = (position + maxReviewsPerPage > this.state.reviews.length) ? this.state.reviews.length : position + maxReviewsPerPage;
     let result = [];
@@ -74,6 +117,7 @@ class ReviewContainer extends React.Component {
       result.push(<Review info={this.state.reviews[i]}/>);
     }
 
+    $("#review-items").fadeIn(200);
     return result;
   }
 
@@ -132,32 +176,30 @@ class ReviewContainer extends React.Component {
     }
   }
 
-  /*TBD:
-  -Add Sort By dropdown menu for Recommended and Newest
-  -Dummy carousel should scale to the width of the component
-  -CSS styling
-  -Fade in/out animation when switching between pages
-  */
   render() {
     let oneCurrentPage = this.state.currentPage + 1;
     let reviews = this.getReviews();
-    return (<div>
-              <span>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore}/></span>
-              {reviews}
+    //let dropdown = <button>Sort By Placeholder</button>;
+    return (<div className={styles.container}>
+              <div className={styles.header}>
+                <div className={styles.reviewSummary}>{this.state.reviewCount} shop reviews <ReviewScore score={this.state.averageScore} className={styles.headerRating}/></div>
+                <Dropdown recommended={this.reviewsByRecommended} newest={this.reviewsByNewest}/>
+              </div>
+              <div id="review-items">{reviews}</div>
               <ReviewPagination className="pagination" currentPage={oneCurrentPage} maxPage={this.state.maxPage} previous={this.previousPage} next={this.nextPage} first={this.firstPage} last={this.lastPage} to={this.toPage}/>
-              <div>Photos from reviews</div>
-              <img src={dummyCarousel}/>
+              <div className={styles.fromReviews}>Photos from reviews</div>
+              <img src={dummyCarousel} className={styles.dummyCarousel}/>
             </div>);
   }
 }
 
 
 //arrow SVGs for Pagination
-const rightArrow = (<svg className="right-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
+const rightArrow = (<svg className={styles.arrow} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
 <path d="M17.3 12.7l.7-.7-.7-.7-4-4c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l2.3 2.3H7c-.6 0-1 .4-1 1s.4 1 1 1h7.2l-2.3 2.3c-.2.2-.3.4-.3.7 0 .6.4 1 1 1 .3 0 .5-.1.7-.3l4-4z"></path>
 </svg>);
 
-const leftArrow = (<svg className="left-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
+const leftArrow = (<svg className={styles.arrow} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="18" width="18">
 <path d="M6.7 11.3L6 12l.7.7 4 4c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4L9.8 13H17c.6 0 1-.4 1-1s-.4-1-1-1H9.8l2.3-2.3c.2-.2.3-.4.3-.7 0-.6-.4-1-1-1-.3 0-.5.1-.7.3l-4 4z"></path>
 </svg>);
 
@@ -181,39 +223,130 @@ class ReviewPagination extends React.Component {
   getPages() {
     let results = [];
     //render first page, then conditionally render from here
-    results.push(<span onClick={this.props.first}>1</span>);
+    results.push(<span onClick={this.props.first} className={styles.pageButton}>1</span>);
     //if current page is 1 or 2, add a 2 to the page list
     if(this.props.currentPage <= 2) {
-      results.push(<span onClick={this.props.to}>2</span>);
+      results.push(<span onClick={this.props.to} className={styles.pageButton}>2</span>);
     }
     //if current page is greater than two (and max page count is also greater than 2), add an ellipsis
     if(this.props.currentPage > 2 && this.props.maxPage > 2) {
-      results.push(<span>...</span>);
+      results.push(<span className={styles.ellipses}>...</span>);
     }
     //if current page is not the last/second to last page, add the current page number to the page list.
     //also, add another ellipsis while we're here
     if(this.props.currentPage < this.props.maxPage -1 && this.props.currentPage > 2) {
-      results.push(<span>{this.props.currentPage}</span>);
+      results.push(<span className={styles.pageButton}>{this.props.currentPage}</span>);
     }
     if(this.props.currentPage < this.props.maxPage - 1) {
-      results.push(<span>...</span>);
+      results.push(<span className={styles.ellipses}>...</span>);
     }
     //if current page is second to last or last, add it to page list
     if(this.props.currentPage >= this.props.maxPage - 1) {
-      results.push(<span onClick={this.props.to}>{this.props.maxPage - 1}</span>);
+      results.push(<span onClick={this.props.to} className={styles.pageButton}>{this.props.maxPage - 1}</span>);
     }
     //finally, draw the last page number if there is more than one page
     if(this.props.maxPage > 2) {
-      results.push(<span onClick={this.props.last}>{this.props.maxPage}</span>)
+      results.push(<span onClick={this.props.last} className={styles.pageButton}>{this.props.maxPage}</span>)
     }
 
     return results;
   }
 
-
+  /*TBD:
+    -additional CSS styling
+  */
   render() {
     let pages = this.getPages();
-    return (<div><span onClick={this.props.previous}>{leftArrow}</span>{pages}<span onClick={this.props.next}>{rightArrow}</span></div>);
+    return (<div className={styles.pagination}><span onClick={this.props.previous} className={styles.pageArrow}>{leftArrow}</span>{pages}<span onClick={this.props.next} className={styles.pageArrow}>{rightArrow}</span></div>);
+  }
+}
+
+//arrow for dropdown menu
+const dropdownArrow = (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" height="24" width="24" className={styles.dropdownArrow}><polygon points="16.5 10 12 16 7.5 10 16.5 10"></polygon></svg>)
+
+//dropdown menu sorts reviews by either Recommended or Newest.
+//Functions to sort reviews should come in on this.props.recommended or this.props.newest
+class Dropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: 'Recommended'
+    };
+    this.getRecommended = this.getRecommended.bind(this);
+    this.getNewest = this.getNewest.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
+  }
+
+  //Closes dropdown menu if user clicks outside of it while open
+  componentDidMount() {
+    window.addEventListener('click', (event) => {
+      if(!event.target.matches('#dropdown-container span') && !(event.target.matches('#dropdown-container svg'))) {
+        this.closeDropdown();
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', (event) => {
+      if(!event.target.matches('#dropdown-container span') && !(event.target.matches('#dropdown-container svg'))) {
+        this.closeDropdown();
+      }
+    });
+  }
+
+  //helper function for dropdown: gets reviews sorted by "recommeneded"
+  getRecommended() {
+    this.props.recommended();
+    let dropdownTop = document.getElementById('dropdown-top-text');
+
+    dropdownTop.innerHTML = "Sort By: Recommended";
+    this.toggleDropdown();
+  }
+
+  //helper function for dropdown: gets reviews sorted by most recent date
+  getNewest () {
+    this.props.newest();
+    let dropdownTop = document.getElementById('dropdown-top-text');
+    dropdownTop.innerHTML ="Sort By: Newest";
+    this.toggleDropdown();
+  }
+
+  toggleDropdown() {
+    let menu = document.getElementById('dropdown-items');
+    let dropdownTop = document.getElementById('dropdown-top');
+    if(menu.style.display === "block") {
+      menu.style.display = "none";
+      dropdownTop.style.borderRadius = "24px";
+    } else {
+      menu.style.display = "block";
+      dropdownTop.style.borderTopLeftRadius = "12px";
+      dropdownTop.style.borderTopRightRadius = "12px";
+      dropdownTop.style.borderBottomLeftRadius = "0px";
+      dropdownTop.style.borderBottomRightRadius = "0px";
+    }
+  }
+
+  //helper function that always sets dropdown to its closed state.
+  //should be used with a listener that checks to see if a user clicks outside of the menu
+  closeDropdown() {
+    let menu = document.getElementById('dropdown-items');
+    let dropdownTop = document.getElementById('dropdown-top');
+
+    menu.style.display = "none";
+    dropdownTop.style.borderRadius = "24px";
+  }
+
+  render () {
+    return (<div className={styles.dropdown}>
+              <div className={styles.dropdownContainer} id="dropdown-container">
+                <span onClick={this.toggleDropdown} className={styles.dropdownTop} id="dropdown-top"><span id="dropdown-top-text">Sort By: Recommended</span> {dropdownArrow}</span>
+                  <div className={styles.dropdownOptions} id="dropdown-items">
+                    <span className={styles.optionrec} id="recommended" onClick={this.getRecommended}>Recommended</span>
+                    <span className={styles.optionnew} id="newest" onClick={this.getNewest}>Newest</span>
+                  </div>
+              </div>
+            </div>);
   }
 }
 

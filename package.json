@@ -28,6 +28,7 @@
     "enzyme-wait": "^1.0.9",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
     "jest": "^26.2.2",
+    "moment": "^2.27.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
     "react": "^16.13.1",

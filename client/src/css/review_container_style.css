@@ -1,0 +1,182 @@
+.container {
+  padding-left: 30px !important;
+  min-width: 640px !important;
+}
+
+.header {
+  margin-bottom: 12px;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  font-family: "Guardian-EgypTT",serif;
+  font-weight: 300;
+  letter-spacing: 0.35px;
+}
+
+.headerRating {
+  display: inline-block !important;
+  position: relative;
+}
+
+.reviewSummary {
+  margin-top: 12px !important;
+  margin-right: 18px !important;
+  margin-bottom: 12px !important;
+  font-size: 26px;
+  line-height: 42px;
+}
+
+/*dropdown sort by menu*/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-top: 12px;
+  justify-content: flex-end;
+  align-self: center;
+  /*
+  font-size: 13px;
+  line-height: 1.4;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 24px;*/
+}
+
+.dropodownContainer {
+ /* min-width: 100%;
+  display: block;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;*/
+}
+
+.dropdownTop {
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.4;
+  min-height: 36px;
+  min-width: 36px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 15px;
+  padding-right: 15px;
+  justify-content: center;
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-weight: 400;
+  border-radius: 24px;
+  min-width: 100%;
+}
+
+
+.dropdownArrow {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dropdownOptions {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+  /*min-width: 100% !important;*/
+}
+
+.optionrec, .optionnew {
+  display: block;
+  cursor: pointer;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 18px;
+  padding-right: 18px;
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-size: 13px;
+  /*min-width: 100%;*/
+}
+
+.optionnew {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.dropdownTop:hover, .optionrec:hover, .optionnew:hover {
+  background-color: #ededed;
+}
+
+/*Pagination buttons*/
+
+.pagination {
+  margin-bottom: 36px !important;
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  color: #222;
+}
+
+.ellipses {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-right: 6px;
+}
+
+.pageButton {
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 24px;
+  background-color: #ededed;
+  margin-right: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.4;
+  min-height: 36px;
+  min-width: 36px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  text-align: center;
+  position: relative;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  box-sizing: border-box !important;
+}
+
+.pageArrow {
+  cursor: pointer;
+  border-radius: 24px;
+  background-color: #ededed;
+  margin-right: 6px;
+  line-height: 1;
+  min-height: 36px;
+  min-width: 36px;
+  padding: 9px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.pageButton:hover, .pageArrow:hover {
+  background-color: #a1a1a1;
+}
+
+.pageButton, .pageArrow {
+  transition: color 200ms ease-out;
+}
+
+.arrow {
+  vertical-align: sub;
+}
+
+/*Placeholder carousel*/
+
+.fromReviews {
+  font-family: "Graphik Webfont",-apple-system,BlinkMacSystemFont,"Roboto","Droid Sans","Segoe UI","Helvetica",Arial,sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 28px;
+  margin-bottom: 12px;
+}
+
+.dummyCarousel {
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin-bottom: 48px;
+}
