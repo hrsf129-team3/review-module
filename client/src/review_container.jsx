@@ -278,6 +278,7 @@ class Dropdown extends React.Component {
     this.closeDropdown = this.closeDropdown.bind(this);
   }
 
+  //Closes dropdown menu if user clicks outside of it while open
   componentDidMount() {
     window.addEventListener('click', (event) => {
       if(!event.target.matches('#dropdown-container span') && !(event.target.matches('#dropdown-container svg'))) {
