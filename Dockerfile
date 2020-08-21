@@ -12,4 +12,4 @@ RUN yarn global add nodemon
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "server-dev" ]
+CMD [ "npm", "run", "start-prod" ]
