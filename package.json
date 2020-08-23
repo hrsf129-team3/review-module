@@ -31,6 +31,7 @@
     "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-wait": "^1.0.9",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "express-static-gzip": "^2.0.7",
     "jest": "^26.2.2",
     "moment": "^2.27.0",
     "mysql": "^2.18.1",
