@@ -2,3 +2,4 @@ documents/
 node_modules
 coverage
 ./database/config.js
+node_modules
